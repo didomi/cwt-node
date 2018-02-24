@@ -16,19 +16,22 @@
   "bugs": {
     "url": "https://github.com/didomi/cwt-node/issues"
   },
-  "main": "src",
+  "main": "dist/token.js",
   "directories": {
     "lib": "src",
-    "test": "test/"
+    "test": "test"
   },
   "scripts": {
     "test": "mocha test/ --recursive",
     "coverage": "nyc --reporter=html --reporter=text-summary --reporter=lcov --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive",
     "lint": "eslint src/. test/.",
-    "docs": "esdoc"
+    "docs": "esdoc",
+    "build": "babel src --out-dir dist"
   },
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.0.2",
     "coveralls": "^3.0.0",
     "esdoc": "^1.0.4",

@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "> 5% in BE"],
+        "node": "6.10"
+      },
+      "modules": false
+    }]
+  ]
+}

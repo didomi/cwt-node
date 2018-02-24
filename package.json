@@ -2,6 +2,20 @@
   "name": "cwt",
   "description": "Consent web token implementation for node.js and the browser",
   "homepage": "https://www.consentwebtoken.io/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didomi/cwt-node.git"
+  },
+  "keywords": [
+    "consent",
+    "token",
+    "cwt",
+    "gdpr"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/didomi/cwt-node/issues"
+  },
   "main": "src",
   "directories": {
     "lib": "src",
@@ -15,6 +29,7 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.0.2",
+    "coveralls": "^3.0.0",
     "eslint": "^4.0.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",

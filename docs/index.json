@@ -583,7 +583,7 @@
     "longname": "src/consent.js~Vendor",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/consent.js",
+    "importPath": "consentwebtoken/src/consent.js",
     "importStyle": null,
     "description": "",
     "lineNumber": 4,
@@ -603,7 +603,7 @@
     "longname": "src/consent.js~Consent",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/consent.js",
+    "importPath": "consentwebtoken/src/consent.js",
     "importStyle": null,
     "description": "Consent information collected for a specific purpose",
     "examples": [
@@ -775,19 +775,8 @@
   {
     "__docId__": 57,
     "kind": "file",
-    "name": "src/index.js",
-    "content": "module.exports = require('./token');\n",
-    "static": true,
-    "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/index.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 58,
-    "kind": "file",
     "name": "src/token.js",
-    "content": "/**\n * @ignore\n */\nconst { Consent } = require('./consent');\n\n/**\n * A consent web token represents the GDPR consents expressed by a user.\n * It can be used for storage or to be shared with third-parties.\n *\n * @example\n * const token = new CWT(\n *   'issuer',\n *   'user@domain.com',\n *   'email'\n * );\n */\nclass CWT {\n  /**\n   * Create a new Consent web token\n   *\n   * @param {string} issuer A unique ID identifying the issuer of the token\n   * @param {string} [userId] The ID of the user that owns the token\n   * @param {string} [userIdType] The type of ID (email, uuid, adid, etc.)\n   * @param {string} [userIdHashMethod] If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n   * @param {Object[]} [consents] A list of consents already given by the user\n   */\n  constructor(tokenContent) {\n    tokenContent = tokenContent || {};\n\n    /**\n     * A unique ID identifying the issuer of the token\n     *\n     * @type {string}\n     */\n    this.issuer = tokenContent.issuer;\n\n    /**\n     * The ID of the user that owns the token\n     *\n     * @type {string}\n     */\n    this.user_id = tokenContent.user_id;\n\n    /**\n     * The type of ID (email, uuid, adid, etc.)\n     *\n     * @type {string}\n     */\n    this.user_id_type = tokenContent.user_id_type;\n\n    /**\n     * If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n     *\n     * @type {string}\n     */\n    this.user_id_hash_method = tokenContent.user_id_hash_method;\n\n    /**\n     * A list of consents already given by the user\n     *\n     * @type {Object[]}\n     */\n    this.consents = (tokenContent.consents || []).map(Consent.fromObject);\n\n    /**\n     * The CWT specification version\n     *\n     * @type {number}\n     */\n    this.version = 1;\n  }\n\n  /**\n   * Export the token information as a plain JavaScript object\n   *\n   * @return {Object}\n   */\n  toObject() {\n    return {\n      issuer: this.issuer,\n      user_id: this.user_id,\n      user_id_type: this.user_id_type,\n      user_id_hash_method: this.user_id_hash_method,\n      consents: this.consents,\n      version: this.version,\n    };\n  }\n\n  /**\n   * Generate a JSON-encoded version of the token\n   *\n   * @return {string}\n   */\n  toJSON() {\n    return JSON.stringify(this.toObject());\n  }\n\n  /**\n   * Generate a base64-encoded version of the token\n   * It first encode the token as JSON then base64-encode it.\n   *\n   * @return {string}\n   */\n  toBase64() {\n    return new Buffer(this.toJSON()).toString('base64');\n  }\n\n  /**\n   * Add a consent given by the user\n   *\n   * @param {string} purpose The purpose for which the user has given consent\n   * @param {string} vendorId The unique vendor ID for which the user has given consent. Use `*` to indicate that the user has given consent for all vendors)\n   * @param {string} [scopeId] The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope.\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(\n   *   CWT.Purposes.Cookies,\n   *   'didomi',\n   *   '*'\n   * );\n   */\n  addConsent(purpose, vendorId, scopeId = null) {\n    let consent = this.getConsent(purpose);\n\n    if (!consent) {\n      consent = new Consent(purpose);\n      this.consents.push(consent);\n    }\n\n    consent.addVendor(vendorId, scopeId);\n  }\n\n  /**\n   * Get the consent given by a user for a given purpose\n   *\n   * @param {string} purpose\n   * @return {Consent} The `Consent` object for the purpose or `null` if there is no consent for that purpose\n   */\n  getConsent(purpose) {\n    return this.consents.find(c => c.purpose === purpose);\n  }\n\n  /**\n   * Check if the user has given consent for a specific purpose, vendor and scope\n   *\n   * If the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.\n   * Make sure that you provide a vendor or scope to match the level of compliance you are targeting.\n   * For instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.\n   *\n   * @param {string} purpose Purpose\n   * @param {string} [vendorId] Unique ID of the vendor to check consent for\n   * @param {string} [scopeId] Scope to check consent for\n   * @return {boolean}\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');\n   * token.hasConsent(CWT.Purposes.Cookies, 'didomi');\n   */\n  hasConsent(purpose, vendorId = null, scopeId = null) {\n    const consent = this.getConsent(purpose);\n\n    if (consent) {\n      // Consent found for that purpose\n\n      if (!vendorId) {\n        // We were not asked to check for a specific vendor\n        // TODO: Check scope here\n        return true;\n      }\n\n      // Check if consent was given for the specific vendor\n      let vendor = consent.getVendor(vendorId);\n\n      if (!vendor) {\n        // Check if consent was given all vendors\n        vendor = consent.getVendor('*');\n\n        if (!vendor) {\n          // Still no vendor\n          return false;\n        }\n      }\n\n      if (!scopeId) {\n        // No scope to check\n        return true;\n      }\n\n      // TODO: Check scope of * vs specific vendor if the scope doesn't match for one or the other\n      return vendor.hasScope(scopeId, false);\n    }\n\n    return false;\n  }\n}\n\n/**\n * Parse a JSON string into a CWT object\n *\n * @param {string} jsonString\n * @return {CWT|null} Return a CWT object or null if the JSON does not represent a valid Consent Web Token\n */\nfunction CWTFromJSON(jsonString) {\n  if (!jsonString) {\n    return null;\n  }\n\n  let object;\n\n  try {\n    object = JSON.parse(jsonString);\n  } catch (error) {\n    return null;\n  }\n\n  return new CWT(object);\n}\n\n/**\n * Parse a base64-encoded JSON string into a CWT object\n *\n * @param {string} base64String\n * @return {CWT|null} Return a CWT object or null if the string does not represent a valid Consent Web Token\n */\nfunction CWTFromBase64(base64String) {\n  if (!base64String) {\n    return null;\n  }\n\n  return CWTFromJSON(new Buffer(base64String, 'base64').toString());\n}\n\n/**\n * List of standard GDPR purposes\n *\n * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.\n */\nconst Purposes = {\n  Cookies: 'cookies',\n};\n\nmodule.exports = {\n  CWT,\n  CWTFromBase64,\n  CWTFromJSON,\n  Purposes,\n};\n",
+    "content": "/**\n * @ignore\n */\nconst { Consent } = require('./consent');\n\n/**\n * A consent web token represents the GDPR consents expressed by a user.\n * It can be used for storage or to be shared with third-parties.\n *\n * @example\n * const token = new CWT(\n *   'issuer',\n *   'user@domain.com',\n *   'email'\n * );\n */\nclass CWT {\n  /**\n   * Create a new Consent web token\n   *\n   * @param {Object} tokenContent The content of the token\n   * @param {string} tokenContent.issuer A unique ID identifying the issuer of the token\n   * @param {string} [tokenContent.user_id] The ID of the user that owns the token\n   * @param {string} [tokenContent.user_id_type] The type of ID (email, uuid, adid, etc.)\n   * @param {string} [tokenContent.user_id_hash_method] If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n   * @param {Object[]} [tokenContent.consents] A list of consents already given by the user\n   */\n  constructor(tokenContent) {\n    tokenContent = tokenContent || {};\n\n    /**\n     * A unique ID identifying the issuer of the token\n     *\n     * @type {string}\n     */\n    this.issuer = tokenContent.issuer;\n\n    /**\n     * The ID of the user that owns the token\n     *\n     * @type {string}\n     */\n    this.user_id = tokenContent.user_id;\n\n    /**\n     * The type of ID (email, uuid, adid, etc.)\n     *\n     * @type {string}\n     */\n    this.user_id_type = tokenContent.user_id_type;\n\n    /**\n     * If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n     *\n     * @type {string}\n     */\n    this.user_id_hash_method = tokenContent.user_id_hash_method;\n\n    /**\n     * A list of consents already given by the user\n     *\n     * @type {Object[]}\n     */\n    this.consents = (tokenContent.consents || []).map(Consent.fromObject);\n\n    /**\n     * The CWT specification version\n     *\n     * @type {number}\n     */\n    this.version = 1;\n  }\n\n  /**\n   * Export the token information as a plain JavaScript object\n   *\n   * @return {Object}\n   */\n  toObject() {\n    return {\n      issuer: this.issuer,\n      user_id: this.user_id,\n      user_id_type: this.user_id_type,\n      user_id_hash_method: this.user_id_hash_method,\n      consents: this.consents,\n      version: this.version,\n    };\n  }\n\n  /**\n   * Generate a JSON-encoded version of the token\n   *\n   * @return {string}\n   */\n  toJSON() {\n    return JSON.stringify(this.toObject());\n  }\n\n  /**\n   * Generate a base64-encoded version of the token\n   * It first encode the token as JSON then base64-encode it.\n   *\n   * @return {string}\n   */\n  toBase64() {\n    return new Buffer(this.toJSON()).toString('base64');\n  }\n\n  /**\n   * Add a consent given by the user\n   *\n   * @param {string} purpose The purpose for which the user has given consent\n   * @param {string} vendorId The unique vendor ID for which the user has given consent. Use `*` to indicate that the user has given consent for all vendors)\n   * @param {string} [scopeId] The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope.\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(\n   *   CWT.Purposes.Cookies,\n   *   'didomi',\n   *   '*'\n   * );\n   */\n  addConsent(purpose, vendorId, scopeId = null) {\n    let consent = this.getConsent(purpose);\n\n    if (!consent) {\n      consent = new Consent(purpose);\n      this.consents.push(consent);\n    }\n\n    consent.addVendor(vendorId, scopeId);\n  }\n\n  /**\n   * Get the consent given by a user for a given purpose\n   *\n   * @param {string} purpose\n   * @return {Consent} The `Consent` object for the purpose or `null` if there is no consent for that purpose\n   */\n  getConsent(purpose) {\n    return this.consents.find(c => c.purpose === purpose);\n  }\n\n  /**\n   * Check if the user has given consent for a specific purpose, vendor and scope\n   *\n   * If the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.\n   * Make sure that you provide a vendor or scope to match the level of compliance you are targeting.\n   * For instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.\n   *\n   * @param {string} purpose Purpose\n   * @param {string} [vendorId] Unique ID of the vendor to check consent for\n   * @param {string} [scopeId] Scope to check consent for\n   * @return {boolean}\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');\n   * token.hasConsent(CWT.Purposes.Cookies, 'didomi');\n   */\n  hasConsent(purpose, vendorId = null, scopeId = null) {\n    const consent = this.getConsent(purpose);\n\n    if (consent) {\n      // Consent found for that purpose\n\n      if (!vendorId) {\n        // We were not asked to check for a specific vendor\n        // TODO: Check scope here\n        return true;\n      }\n\n      // Check if consent was given for the specific vendor\n      let vendor = consent.getVendor(vendorId);\n\n      if (!vendor) {\n        // Check if consent was given all vendors\n        vendor = consent.getVendor('*');\n\n        if (!vendor) {\n          // Still no vendor\n          return false;\n        }\n      }\n\n      if (!scopeId) {\n        // No scope to check\n        return true;\n      }\n\n      // TODO: Check scope of * vs specific vendor if the scope doesn't match for one or the other\n      return vendor.hasScope(scopeId, false);\n    }\n\n    return false;\n  }\n}\n\n/**\n * Parse a JSON string into a CWT object\n *\n * @param {string} jsonString\n * @return {CWT|null} Return a CWT object or null if the JSON does not represent a valid Consent Web Token\n */\nfunction CWTFromJSON(jsonString) {\n  if (!jsonString) {\n    return null;\n  }\n\n  let object;\n\n  try {\n    object = JSON.parse(jsonString);\n  } catch (error) {\n    return null;\n  }\n\n  return new CWT(object);\n}\n\n/**\n * Parse a base64-encoded JSON string into a CWT object\n *\n * @param {string} base64String\n * @return {CWT|null} Return a CWT object or null if the string does not represent a valid Consent Web Token\n */\nfunction CWTFromBase64(base64String) {\n  if (!base64String) {\n    return null;\n  }\n\n  return CWTFromJSON(new Buffer(base64String, 'base64').toString());\n}\n\n/**\n * List of standard GDPR purposes\n *\n * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.\n */\nconst Purposes = {\n  Cookies: 'cookies',\n};\n\nmodule.exports = {\n  CWT,\n  CWTFromBase64,\n  CWTFromJSON,\n  Purposes,\n};\n",
     "static": true,
     "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/token.js",
     "access": "public",
@@ -795,7 +784,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 59,
+    "__docId__": 58,
     "kind": "variable",
     "name": "Consent",
     "memberof": "src/token.js",
@@ -803,7 +792,7 @@
     "longname": "src/token.js~Consent",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/token.js",
+    "importPath": "consentwebtoken/src/token.js",
     "importStyle": null,
     "description": "",
     "lineNumber": 4,
@@ -815,7 +804,7 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 59,
     "kind": "class",
     "name": "CWT",
     "memberof": "src/token.js",
@@ -823,7 +812,7 @@
     "longname": "src/token.js~CWT",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/token.js",
+    "importPath": "consentwebtoken/src/token.js",
     "importStyle": null,
     "description": "A consent web token represents the GDPR consents expressed by a user.\nIt can be used for storage or to be shared with third-parties.",
     "examples": [
@@ -833,7 +822,7 @@
     "interface": false
   },
   {
-    "__docId__": 61,
+    "__docId__": 60,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/token.js~CWT",
@@ -843,8 +832,18 @@
     "longname": "src/token.js~CWT#constructor",
     "access": "public",
     "description": "Create a new Consent web token",
-    "lineNumber": 27,
+    "lineNumber": 28,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "tokenContent",
+        "description": "The content of the token"
+      },
       {
         "nullable": null,
         "types": [
@@ -852,7 +851,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "issuer",
+        "name": "tokenContent.issuer",
         "description": "A unique ID identifying the issuer of the token"
       },
       {
@@ -862,7 +861,7 @@
         ],
         "spread": false,
         "optional": true,
-        "name": "userId",
+        "name": "tokenContent.user_id",
         "description": "The ID of the user that owns the token"
       },
       {
@@ -872,7 +871,7 @@
         ],
         "spread": false,
         "optional": true,
-        "name": "userIdType",
+        "name": "tokenContent.user_id_type",
         "description": "The type of ID (email, uuid, adid, etc.)"
       },
       {
@@ -882,7 +881,7 @@
         ],
         "spread": false,
         "optional": true,
-        "name": "userIdHashMethod",
+        "name": "tokenContent.user_id_hash_method",
         "description": "If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)"
       },
       {
@@ -892,13 +891,13 @@
         ],
         "spread": false,
         "optional": true,
-        "name": "consents",
+        "name": "tokenContent.consents",
         "description": "A list of consents already given by the user"
       }
     ]
   },
   {
-    "__docId__": 62,
+    "__docId__": 61,
     "kind": "member",
     "name": "issuer",
     "memberof": "src/token.js~CWT",
@@ -906,7 +905,26 @@
     "longname": "src/token.js~CWT#issuer",
     "access": "public",
     "description": "A unique ID identifying the issuer of the token",
-    "lineNumber": 35,
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "member",
+    "name": "user_id",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#user_id",
+    "access": "public",
+    "description": "The ID of the user that owns the token",
+    "lineNumber": 43,
     "type": {
       "nullable": null,
       "types": [
@@ -919,13 +937,13 @@
   {
     "__docId__": 63,
     "kind": "member",
-    "name": "user_id",
+    "name": "user_id_type",
     "memberof": "src/token.js~CWT",
     "static": false,
-    "longname": "src/token.js~CWT#user_id",
+    "longname": "src/token.js~CWT#user_id_type",
     "access": "public",
-    "description": "The ID of the user that owns the token",
-    "lineNumber": 42,
+    "description": "The type of ID (email, uuid, adid, etc.)",
+    "lineNumber": 50,
     "type": {
       "nullable": null,
       "types": [
@@ -938,13 +956,13 @@
   {
     "__docId__": 64,
     "kind": "member",
-    "name": "user_id_type",
+    "name": "user_id_hash_method",
     "memberof": "src/token.js~CWT",
     "static": false,
-    "longname": "src/token.js~CWT#user_id_type",
+    "longname": "src/token.js~CWT#user_id_hash_method",
     "access": "public",
-    "description": "The type of ID (email, uuid, adid, etc.)",
-    "lineNumber": 49,
+    "description": "If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)",
+    "lineNumber": 57,
     "type": {
       "nullable": null,
       "types": [
@@ -957,32 +975,13 @@
   {
     "__docId__": 65,
     "kind": "member",
-    "name": "user_id_hash_method",
-    "memberof": "src/token.js~CWT",
-    "static": false,
-    "longname": "src/token.js~CWT#user_id_hash_method",
-    "access": "public",
-    "description": "If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)",
-    "lineNumber": 56,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 66,
-    "kind": "member",
     "name": "consents",
     "memberof": "src/token.js~CWT",
     "static": false,
     "longname": "src/token.js~CWT#consents",
     "access": "public",
     "description": "A list of consents already given by the user",
-    "lineNumber": 63,
+    "lineNumber": 64,
     "type": {
       "nullable": null,
       "types": [
@@ -993,7 +992,7 @@
     }
   },
   {
-    "__docId__": 67,
+    "__docId__": 66,
     "kind": "member",
     "name": "version",
     "memberof": "src/token.js~CWT",
@@ -1001,7 +1000,7 @@
     "longname": "src/token.js~CWT#version",
     "access": "public",
     "description": "The CWT specification version",
-    "lineNumber": 70,
+    "lineNumber": 71,
     "type": {
       "nullable": null,
       "types": [
@@ -1012,7 +1011,7 @@
     }
   },
   {
-    "__docId__": 68,
+    "__docId__": 67,
     "kind": "method",
     "name": "toObject",
     "memberof": "src/token.js~CWT",
@@ -1022,7 +1021,7 @@
     "longname": "src/token.js~CWT#toObject",
     "access": "public",
     "description": "Export the token information as a plain JavaScript object",
-    "lineNumber": 78,
+    "lineNumber": 79,
     "return": {
       "nullable": null,
       "types": [
@@ -1034,7 +1033,7 @@
     "params": []
   },
   {
-    "__docId__": 69,
+    "__docId__": 68,
     "kind": "method",
     "name": "toJSON",
     "memberof": "src/token.js~CWT",
@@ -1044,7 +1043,29 @@
     "longname": "src/token.js~CWT#toJSON",
     "access": "public",
     "description": "Generate a JSON-encoded version of the token",
-    "lineNumber": 94,
+    "lineNumber": 95,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "toBase64",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#toBase64",
+    "access": "public",
+    "description": "Generate a base64-encoded version of the token\nIt first encode the token as JSON then base64-encode it.",
+    "lineNumber": 105,
     "return": {
       "nullable": null,
       "types": [
@@ -1058,28 +1079,6 @@
   {
     "__docId__": 70,
     "kind": "method",
-    "name": "toBase64",
-    "memberof": "src/token.js~CWT",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/token.js~CWT#toBase64",
-    "access": "public",
-    "description": "Generate a base64-encoded version of the token\nIt first encode the token as JSON then base64-encode it.",
-    "lineNumber": 104,
-    "return": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": ""
-    },
-    "params": []
-  },
-  {
-    "__docId__": 71,
-    "kind": "method",
     "name": "addConsent",
     "memberof": "src/token.js~CWT",
     "generator": false,
@@ -1091,7 +1090,7 @@
     "examples": [
       "const token = new CWT('issuer');\ntoken.addConsent(\n  CWT.Purposes.Cookies,\n  'didomi',\n  '*'\n);"
     ],
-    "lineNumber": 123,
+    "lineNumber": 124,
     "params": [
       {
         "nullable": null,
@@ -1127,7 +1126,7 @@
     "return": null
   },
   {
-    "__docId__": 72,
+    "__docId__": 71,
     "kind": "method",
     "name": "getConsent",
     "memberof": "src/token.js~CWT",
@@ -1137,7 +1136,7 @@
     "longname": "src/token.js~CWT#getConsent",
     "access": "public",
     "description": "Get the consent given by a user for a given purpose",
-    "lineNumber": 140,
+    "lineNumber": 141,
     "params": [
       {
         "nullable": null,
@@ -1160,7 +1159,7 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 72,
     "kind": "method",
     "name": "hasConsent",
     "memberof": "src/token.js~CWT",
@@ -1173,7 +1172,7 @@
     "examples": [
       "const token = new CWT('issuer');\ntoken.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');\ntoken.hasConsent(CWT.Purposes.Cookies, 'didomi');"
     ],
-    "lineNumber": 161,
+    "lineNumber": 162,
     "params": [
       {
         "nullable": null,
@@ -1216,7 +1215,7 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 73,
     "kind": "function",
     "name": "CWTFromJSON",
     "memberof": "src/token.js",
@@ -1226,10 +1225,10 @@
     "longname": "src/token.js~CWTFromJSON",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/token.js",
+    "importPath": "consentwebtoken/src/token.js",
     "importStyle": null,
     "description": "Parse a JSON string into a CWT object",
-    "lineNumber": 205,
+    "lineNumber": 206,
     "params": [
       {
         "nullable": null,
@@ -1253,7 +1252,7 @@
     }
   },
   {
-    "__docId__": 75,
+    "__docId__": 74,
     "kind": "function",
     "name": "CWTFromBase64",
     "memberof": "src/token.js",
@@ -1263,10 +1262,10 @@
     "longname": "src/token.js~CWTFromBase64",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/token.js",
+    "importPath": "consentwebtoken/src/token.js",
     "importStyle": null,
     "description": "Parse a base64-encoded JSON string into a CWT object",
-    "lineNumber": 227,
+    "lineNumber": 228,
     "params": [
       {
         "nullable": null,
@@ -1290,7 +1289,7 @@
     }
   },
   {
-    "__docId__": 76,
+    "__docId__": 75,
     "kind": "variable",
     "name": "Purposes",
     "memberof": "src/token.js",
@@ -1298,10 +1297,10 @@
     "longname": "src/token.js~Purposes",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/token.js",
+    "importPath": "consentwebtoken/src/token.js",
     "importStyle": null,
     "description": "List of standard GDPR purposes\n\nThis list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.",
-    "lineNumber": 240,
+    "lineNumber": 241,
     "type": {
       "types": [
         "{\"Cookies\": string}"
@@ -1309,7 +1308,7 @@
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 76,
     "kind": "file",
     "name": "src/vendor.js",
     "content": "/**\n * Vendor\n *\n * A vendor for which consent can be collected\n *\n * @ignore\n */\nclass Vendor {\n  constructor(id, scopes = []) {\n    this.id = id;\n    this.scopes = scopes;\n  }\n\n  static fromObject(object) {\n    if (!object) {\n      return null;\n    }\n\n    if (\n      typeof object.id !== 'string'\n      || !object.id\n    ) {\n      return null;\n    }\n\n    return new Vendor(\n      object.id,\n      Array.isArray(object.scopes) ? object.scopes : []\n    );\n  }\n\n  addScope(scopeId) {\n    if (!scopeId) {\n      return;\n    }\n\n    if (this.scopes.indexOf(scopeId) !== -1) {\n      return;\n    }\n\n    this.scopes.push(scopeId);\n  }\n\n  hasScope(scopeId, global = true) {\n    if (global && this.scopes.indexOf('*') !== -1) {\n      // Global scope, all scopes are set to true\n      return true;\n    }\n\n    return this.scopes.indexOf(scopeId) !== -1;\n  }\n}\n\nmodule.exports = { Vendor };\n",
@@ -1320,7 +1319,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 78,
+    "__docId__": 77,
     "kind": "class",
     "name": "Vendor",
     "memberof": "src/vendor.js",
@@ -1328,7 +1327,7 @@
     "longname": "src/vendor.js~Vendor",
     "access": "public",
     "export": false,
-    "importPath": "cwt/src/vendor.js",
+    "importPath": "consentwebtoken/src/vendor.js",
     "importStyle": null,
     "description": "Vendor\n\nA vendor for which consent can be collected",
     "lineNumber": 8,
@@ -1336,7 +1335,7 @@
     "interface": false
   },
   {
-    "__docId__": 79,
+    "__docId__": 78,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/vendor.js~Vendor",
@@ -1350,7 +1349,7 @@
     "undocument": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 79,
     "kind": "member",
     "name": "id",
     "memberof": "src/vendor.js~Vendor",
@@ -1367,7 +1366,7 @@
     }
   },
   {
-    "__docId__": 81,
+    "__docId__": 80,
     "kind": "member",
     "name": "scopes",
     "memberof": "src/vendor.js~Vendor",
@@ -1384,7 +1383,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 81,
     "kind": "method",
     "name": "fromObject",
     "memberof": "src/vendor.js~Vendor",
@@ -1411,7 +1410,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 82,
     "kind": "method",
     "name": "addScope",
     "memberof": "src/vendor.js~Vendor",
@@ -1434,7 +1433,7 @@
     "return": null
   },
   {
-    "__docId__": 84,
+    "__docId__": 83,
     "kind": "method",
     "name": "hasScope",
     "memberof": "src/vendor.js~Vendor",
@@ -1479,7 +1478,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cwt\",\n  \"description\": \"Consent web token implementation for node.js and the browser\",\n  \"homepage\": \"https://www.consentwebtoken.io/\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/didomi/cwt-node.git\"\n  },\n  \"keywords\": [\n    \"consent\",\n    \"token\",\n    \"cwt\",\n    \"gdpr\"\n  ],\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/didomi/cwt-node/issues\"\n  },\n  \"main\": \"src\",\n  \"directories\": {\n    \"lib\": \"src\",\n    \"test\": \"test/\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha test/ --recursive\",\n    \"coverage\": \"nyc --reporter=html --reporter=text-summary --reporter=lcov --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive\",\n    \"lint\": \"eslint src/. test/.\",\n    \"docs\": \"esdoc\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"chai\": \"^4.0.2\",\n    \"coveralls\": \"^3.0.0\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.0.0\",\n    \"eslint-config-airbnb-base\": \"^11.2.0\",\n    \"eslint-plugin-import\": \"^2.3.0\",\n    \"eslint-plugin-mocha\": \"^4.11.0\",\n    \"mocha\": \"^3.4.2\",\n    \"nyc\": \"^11.0.2\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"consentwebtoken\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Consent web token implementation for node.js and the browser\",\n  \"homepage\": \"https://www.consentwebtoken.io/\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/didomi/cwt-node.git\"\n  },\n  \"keywords\": [\n    \"consent\",\n    \"token\",\n    \"cwt\",\n    \"gdpr\"\n  ],\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/didomi/cwt-node/issues\"\n  },\n  \"files\": [\n    \"dist/\"\n  ],\n  \"main\": \"dist/token.js\",\n  \"directories\": {\n    \"lib\": \"src\",\n    \"test\": \"test\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha test/ --recursive\",\n    \"coverage\": \"nyc --reporter=html --reporter=text-summary --reporter=lcov --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive\",\n    \"lint\": \"eslint src/. test/.\",\n    \"docs\": \"esdoc\",\n    \"build\": \"babel src --out-dir dist\",\n    \"publish\": \"npm build && npm publish .\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"chai\": \"^4.0.2\",\n    \"coveralls\": \"^3.0.0\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.0.0\",\n    \"eslint-config-airbnb-base\": \"^11.2.0\",\n    \"eslint-plugin-import\": \"^2.3.0\",\n    \"eslint-plugin-mocha\": \"^4.11.0\",\n    \"mocha\": \"^3.4.2\",\n    \"nyc\": \"^11.0.2\"\n  }\n}\n",
     "longname": "C:\\Users\\Jawad\\Documents\\Development\\didomi\\cwt-node\\package.json",
     "name": "package.json",
     "static": true,

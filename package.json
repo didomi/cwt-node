@@ -1,5 +1,6 @@
 {
-  "name": "cwt",
+  "name": "consentwebtoken",
+  "version": "1.0.0",
   "description": "Consent web token implementation for node.js and the browser",
   "homepage": "https://www.consentwebtoken.io/",
   "repository": {
@@ -16,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/didomi/cwt-node/issues"
   },
+  "files": [
+    "dist/"
+  ],
   "main": "dist/token.js",
   "directories": {
     "lib": "src",
@@ -26,7 +30,8 @@
     "coverage": "nyc --reporter=html --reporter=text-summary --reporter=lcov --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive",
     "lint": "eslint src/. test/.",
     "docs": "esdoc",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "publish": "npm build && npm publish ."
   },
   "dependencies": {},
   "devDependencies": {

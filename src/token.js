@@ -18,11 +18,12 @@ class CWT {
   /**
    * Create a new Consent web token
    *
-   * @param {string} issuer A unique ID identifying the issuer of the token
-   * @param {string} [userId] The ID of the user that owns the token
-   * @param {string} [userIdType] The type of ID (email, uuid, adid, etc.)
-   * @param {string} [userIdHashMethod] If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)
-   * @param {Object[]} [consents] A list of consents already given by the user
+   * @param {Object} tokenContent The content of the token
+   * @param {string} tokenContent.issuer A unique ID identifying the issuer of the token
+   * @param {string} [tokenContent.user_id] The ID of the user that owns the token
+   * @param {string} [tokenContent.user_id_type] The type of ID (email, uuid, adid, etc.)
+   * @param {string} [tokenContent.user_id_hash_method] If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)
+   * @param {Object[]} [tokenContent.consents] A list of consents already given by the user
    */
   constructor(tokenContent) {
     tokenContent = tokenContent || {};

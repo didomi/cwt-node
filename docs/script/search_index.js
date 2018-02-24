@@ -1,26 +1,26 @@
 window.esdocSearchIndex = [
   [
-    "cwt/src/token.js~cwt",
+    "consentwebtoken/src/token.js~cwt",
     "class/src/token.js~CWT.html",
-    "<span>CWT</span> <span class=\"search-result-import-path\">cwt/src/token.js</span>",
+    "<span>CWT</span> <span class=\"search-result-import-path\">consentwebtoken/src/token.js</span>",
     "class"
   ],
   [
-    "cwt/src/token.js~cwtfrombase64",
+    "consentwebtoken/src/token.js~cwtfrombase64",
     "function/index.html#static-function-CWTFromBase64",
-    "<span>CWTFromBase64</span> <span class=\"search-result-import-path\">cwt/src/token.js</span>",
+    "<span>CWTFromBase64</span> <span class=\"search-result-import-path\">consentwebtoken/src/token.js</span>",
     "function"
   ],
   [
-    "cwt/src/token.js~cwtfromjson",
+    "consentwebtoken/src/token.js~cwtfromjson",
     "function/index.html#static-function-CWTFromJSON",
-    "<span>CWTFromJSON</span> <span class=\"search-result-import-path\">cwt/src/token.js</span>",
+    "<span>CWTFromJSON</span> <span class=\"search-result-import-path\">consentwebtoken/src/token.js</span>",
     "function"
   ],
   [
-    "cwt/src/token.js~purposes",
+    "consentwebtoken/src/token.js~purposes",
     "variable/index.html#static-variable-Purposes",
-    "<span>Purposes</span> <span class=\"search-result-import-path\">cwt/src/token.js</span>",
+    "<span>Purposes</span> <span class=\"search-result-import-path\">consentwebtoken/src/token.js</span>",
     "variable"
   ],
   [
@@ -309,12 +309,6 @@ window.esdocSearchIndex = [
     "src/consent.js",
     "file/src/consent.js.html",
     "src/consent.js",
-    "file"
-  ],
-  [
-    "src/index.js",
-    "file/src/index.js.html",
-    "src/index.js",
     "file"
   ],
   [

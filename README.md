@@ -51,7 +51,7 @@ The package has no peer dependency.
 
 ## Documentation
 
-The API documentation is available here: https://didomi.github.io/cwt-node/
+The API documentation is available here: https://didomi.github.io/cwt-node/class/src/token.js~CWT.html
 
 ## License
 

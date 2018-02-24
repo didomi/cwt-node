@@ -1,0 +1,1488 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/consent.js",
+    "content": "/**\n * @ignore\n */\nconst { Vendor } = require('./vendor');\n\n/**\n * Consent information collected for a specific purpose\n *\n * @example\n * const consent = new Consent(Purposes.Cookies, [\n *   {\n *     id: 'didomi',\n *     scopes: ['.didomi.io'],\n *   },\n * ]);\n *\n * @ignore\n */\nclass Consent {\n  /**\n   * Create a new Consent\n   *\n   * @param {string} purpose The purpose for which consent has been given\n   * @param {string} [vendors] The vendors for which consent has been given (for that specific purpose)\n   */\n  constructor(purpose, vendors = []) {\n    this.purpose = purpose;\n    this.vendors = vendors.map(Vendor.fromObject);\n  }\n\n  /**\n   * Add a new vendor to the consent, to indicate that the user has given consent for the pair (purpose, vendor)\n   *\n   * @param {string} vendorId Unique ID of the vendor\n   * @param {string} [scopeId] Unique ID of the scope\n   */\n  addVendor(vendorId, scopeId = null) {\n    let vendor = this.getVendor(vendorId);\n\n    if (!vendor) {\n      vendor = new Vendor(vendorId);\n      this.vendors.push(vendor);\n    }\n\n    if (scopeId) {\n      vendor.addScope(scopeId);\n    }\n  }\n\n  getVendor(id) {\n    return this.vendors.find(v => v.id === id);\n  }\n\n  static fromObject(object) {\n    if (!object) {\n      return null;\n    }\n\n    if (\n      typeof object.purpose !== 'string'\n      || !object.purpose\n    ) {\n      return null;\n    }\n\n    return new Consent(\n      object.purpose,\n      Array.isArray(object.vendors) ? object.vendors : []\n    );\n  }\n}\n\nmodule.exports = { Consent };\n",
+    "static": true,
+    "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/consent.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "Vendor",
+    "memberof": "src/consent.js",
+    "static": true,
+    "longname": "src/consent.js~Vendor",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/consent.js",
+    "importStyle": null,
+    "description": "",
+    "lineNumber": 4,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "class",
+    "name": "Consent",
+    "memberof": "src/consent.js",
+    "static": true,
+    "longname": "src/consent.js~Consent",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/consent.js",
+    "importStyle": null,
+    "description": "Consent information collected for a specific purpose",
+    "examples": [
+      "const consent = new Consent(Purposes.Cookies, [\n  {\n    id: 'didomi',\n    scopes: ['.didomi.io'],\n  },\n]);"
+    ],
+    "lineNumber": 19,
+    "ignore": true,
+    "interface": false
+  },
+  {
+    "__docId__": 51,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/consent.js~Consent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/consent.js~Consent#constructor",
+    "access": "public",
+    "description": "Create a new Consent",
+    "lineNumber": 26,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "purpose",
+        "description": "The purpose for which consent has been given"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "vendors",
+        "description": "The vendors for which consent has been given (for that specific purpose)"
+      }
+    ]
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "purpose",
+    "memberof": "src/consent.js~Consent",
+    "static": false,
+    "longname": "src/consent.js~Consent#purpose",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "vendors",
+    "memberof": "src/consent.js~Consent",
+    "static": false,
+    "longname": "src/consent.js~Consent#vendors",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "addVendor",
+    "memberof": "src/consent.js~Consent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/consent.js~Consent#addVendor",
+    "access": "public",
+    "description": "Add a new vendor to the consent, to indicate that the user has given consent for the pair (purpose, vendor)",
+    "lineNumber": 37,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "vendorId",
+        "description": "Unique ID of the vendor"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "scopeId",
+        "description": "Unique ID of the scope"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "getVendor",
+    "memberof": "src/consent.js~Consent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/consent.js~Consent#getVendor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "fromObject",
+    "memberof": "src/consent.js~Consent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/consent.js~Consent.fromObject",
+    "access": "public",
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "params": [
+      {
+        "name": "object",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "module.exports = require('./token');\n",
+    "static": true,
+    "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 58,
+    "kind": "file",
+    "name": "src/token.js",
+    "content": "/**\n * @ignore\n */\nconst { Consent } = require('./consent');\n\n/**\n * A consent web token represents the GDPR consents expressed by a user.\n * It can be used for storage or to be shared with third-parties.\n *\n * @example\n * const token = new CWT(\n *   'issuer',\n *   'user@domain.com',\n *   'email'\n * );\n */\nclass CWT {\n  /**\n   * Create a new Consent web token\n   *\n   * @param {string} issuer A unique ID identifying the issuer of the token\n   * @param {string} [userId] The ID of the user that owns the token\n   * @param {string} [userIdType] The type of ID (email, uuid, adid, etc.)\n   * @param {string} [userIdHashMethod] If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n   * @param {Object[]} [consents] A list of consents already given by the user\n   */\n  constructor(tokenContent) {\n    tokenContent = tokenContent || {};\n\n    /**\n     * A unique ID identifying the issuer of the token\n     *\n     * @type {string}\n     */\n    this.issuer = tokenContent.issuer;\n\n    /**\n     * The ID of the user that owns the token\n     *\n     * @type {string}\n     */\n    this.user_id = tokenContent.user_id;\n\n    /**\n     * The type of ID (email, uuid, adid, etc.)\n     *\n     * @type {string}\n     */\n    this.user_id_type = tokenContent.user_id_type;\n\n    /**\n     * If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)\n     *\n     * @type {string}\n     */\n    this.user_id_hash_method = tokenContent.user_id_hash_method;\n\n    /**\n     * A list of consents already given by the user\n     *\n     * @type {Object[]}\n     */\n    this.consents = (tokenContent.consents || []).map(Consent.fromObject);\n\n    /**\n     * The CWT specification version\n     *\n     * @type {number}\n     */\n    this.version = 1;\n  }\n\n  /**\n   * Export the token information as a plain JavaScript object\n   *\n   * @return {Object}\n   */\n  toObject() {\n    return {\n      issuer: this.issuer,\n      user_id: this.user_id,\n      user_id_type: this.user_id_type,\n      user_id_hash_method: this.user_id_hash_method,\n      consents: this.consents,\n      version: this.version,\n    };\n  }\n\n  /**\n   * Generate a JSON-encoded version of the token\n   *\n   * @return {string}\n   */\n  toJSON() {\n    return JSON.stringify(this.toObject());\n  }\n\n  /**\n   * Generate a base64-encoded version of the token\n   * It first encode the token as JSON then base64-encode it.\n   *\n   * @return {string}\n   */\n  toBase64() {\n    return new Buffer(this.toJSON()).toString('base64');\n  }\n\n  /**\n   * Add a consent given by the user\n   *\n   * @param {string} purpose The purpose for which the user has given consent\n   * @param {string} vendorId The unique vendor ID for which the user has given consent. Use `*` to indicate that the user has given consent for all vendors)\n   * @param {string} [scopeId] The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope.\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(\n   *   CWT.Purposes.Cookies,\n   *   'didomi',\n   *   '*'\n   * );\n   */\n  addConsent(purpose, vendorId, scopeId = null) {\n    let consent = this.getConsent(purpose);\n\n    if (!consent) {\n      consent = new Consent(purpose);\n      this.consents.push(consent);\n    }\n\n    consent.addVendor(vendorId, scopeId);\n  }\n\n  /**\n   * Get the consent given by a user for a given purpose\n   *\n   * @param {string} purpose\n   * @return {Consent} The `Consent` object for the purpose or `null` if there is no consent for that purpose\n   */\n  getConsent(purpose) {\n    return this.consents.find(c => c.purpose === purpose);\n  }\n\n  /**\n   * Check if the user has given consent for a specific purpose, vendor and scope\n   *\n   * If the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.\n   * Make sure that you provide a vendor or scope to match the level of compliance you are targeting.\n   * For instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.\n   *\n   * @param {string} purpose Purpose\n   * @param {string} [vendorId] Unique ID of the vendor to check consent for\n   * @param {string} [scopeId] Scope to check consent for\n   * @return {boolean}\n   *\n   * @example\n   * const token = new CWT('issuer');\n   * token.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');\n   * token.hasConsent(CWT.Purposes.Cookies, 'didomi');\n   */\n  hasConsent(purpose, vendorId = null, scopeId = null) {\n    const consent = this.getConsent(purpose);\n\n    if (consent) {\n      // Consent found for that purpose\n\n      if (!vendorId) {\n        // We were not asked to check for a specific vendor\n        // TODO: Check scope here\n        return true;\n      }\n\n      // Check if consent was given for the specific vendor\n      let vendor = consent.getVendor(vendorId);\n\n      if (!vendor) {\n        // Check if consent was given all vendors\n        vendor = consent.getVendor('*');\n\n        if (!vendor) {\n          // Still no vendor\n          return false;\n        }\n      }\n\n      if (!scopeId) {\n        // No scope to check\n        return true;\n      }\n\n      // TODO: Check scope of * vs specific vendor if the scope doesn't match for one or the other\n      return vendor.hasScope(scopeId, false);\n    }\n\n    return false;\n  }\n}\n\n/**\n * Parse a JSON string into a CWT object\n *\n * @param {string} jsonString\n * @return {CWT|null} Return a CWT object or null if the JSON does not represent a valid Consent Web Token\n */\nfunction CWTFromJSON(jsonString) {\n  if (!jsonString) {\n    return null;\n  }\n\n  let object;\n\n  try {\n    object = JSON.parse(jsonString);\n  } catch (error) {\n    return null;\n  }\n\n  return new CWT(object);\n}\n\n/**\n * Parse a base64-encoded JSON string into a CWT object\n *\n * @param {string} base64String\n * @return {CWT|null} Return a CWT object or null if the string does not represent a valid Consent Web Token\n */\nfunction CWTFromBase64(base64String) {\n  if (!base64String) {\n    return null;\n  }\n\n  return CWTFromJSON(new Buffer(base64String, 'base64').toString());\n}\n\n/**\n * List of standard GDPR purposes\n *\n * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.\n */\nconst Purposes = {\n  Cookies: 'cookies',\n};\n\nmodule.exports = {\n  CWT,\n  CWTFromBase64,\n  CWTFromJSON,\n  Purposes,\n};\n",
+    "static": true,
+    "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/token.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "Consent",
+    "memberof": "src/token.js",
+    "static": true,
+    "longname": "src/token.js~Consent",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/token.js",
+    "importStyle": null,
+    "description": "",
+    "lineNumber": 4,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "class",
+    "name": "CWT",
+    "memberof": "src/token.js",
+    "static": true,
+    "longname": "src/token.js~CWT",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/token.js",
+    "importStyle": null,
+    "description": "A consent web token represents the GDPR consents expressed by a user.\nIt can be used for storage or to be shared with third-parties.",
+    "examples": [
+      "const token = new CWT(\n  'issuer',\n  'user@domain.com',\n  'email'\n);"
+    ],
+    "lineNumber": 17,
+    "interface": false
+  },
+  {
+    "__docId__": 61,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#constructor",
+    "access": "public",
+    "description": "Create a new Consent web token",
+    "lineNumber": 27,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "issuer",
+        "description": "A unique ID identifying the issuer of the token"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "userId",
+        "description": "The ID of the user that owns the token"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "userIdType",
+        "description": "The type of ID (email, uuid, adid, etc.)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "userIdHashMethod",
+        "description": "If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "consents",
+        "description": "A list of consents already given by the user"
+      }
+    ]
+  },
+  {
+    "__docId__": 62,
+    "kind": "member",
+    "name": "issuer",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#issuer",
+    "access": "public",
+    "description": "A unique ID identifying the issuer of the token",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "member",
+    "name": "user_id",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#user_id",
+    "access": "public",
+    "description": "The ID of the user that owns the token",
+    "lineNumber": 42,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "member",
+    "name": "user_id_type",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#user_id_type",
+    "access": "public",
+    "description": "The type of ID (email, uuid, adid, etc.)",
+    "lineNumber": 49,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "member",
+    "name": "user_id_hash_method",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#user_id_hash_method",
+    "access": "public",
+    "description": "If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)",
+    "lineNumber": 56,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "consents",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#consents",
+    "access": "public",
+    "description": "A list of consents already given by the user",
+    "lineNumber": 63,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "version",
+    "memberof": "src/token.js~CWT",
+    "static": false,
+    "longname": "src/token.js~CWT#version",
+    "access": "public",
+    "description": "The CWT specification version",
+    "lineNumber": 70,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "method",
+    "name": "toObject",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#toObject",
+    "access": "public",
+    "description": "Export the token information as a plain JavaScript object",
+    "lineNumber": 78,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#toJSON",
+    "access": "public",
+    "description": "Generate a JSON-encoded version of the token",
+    "lineNumber": 94,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "toBase64",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#toBase64",
+    "access": "public",
+    "description": "Generate a base64-encoded version of the token\nIt first encode the token as JSON then base64-encode it.",
+    "lineNumber": 104,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "addConsent",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#addConsent",
+    "access": "public",
+    "description": "Add a consent given by the user",
+    "examples": [
+      "const token = new CWT('issuer');\ntoken.addConsent(\n  CWT.Purposes.Cookies,\n  'didomi',\n  '*'\n);"
+    ],
+    "lineNumber": 123,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "purpose",
+        "description": "The purpose for which the user has given consent"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "vendorId",
+        "description": "The unique vendor ID for which the user has given consent. Use `*` to indicate that the user has given consent for all vendors)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "scopeId",
+        "description": "The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "getConsent",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#getConsent",
+    "access": "public",
+    "description": "Get the consent given by a user for a given purpose",
+    "lineNumber": 140,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "purpose",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Consent"
+      ],
+      "spread": false,
+      "description": "The `Consent` object for the purpose or `null` if there is no consent for that purpose"
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "hasConsent",
+    "memberof": "src/token.js~CWT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/token.js~CWT#hasConsent",
+    "access": "public",
+    "description": "Check if the user has given consent for a specific purpose, vendor and scope\n\nIf the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.\nMake sure that you provide a vendor or scope to match the level of compliance you are targeting.\nFor instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.",
+    "examples": [
+      "const token = new CWT('issuer');\ntoken.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');\ntoken.hasConsent(CWT.Purposes.Cookies, 'didomi');"
+    ],
+    "lineNumber": 161,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "purpose",
+        "description": "Purpose"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "vendorId",
+        "description": "Unique ID of the vendor to check consent for"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "scopeId",
+        "description": "Scope to check consent for"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "function",
+    "name": "CWTFromJSON",
+    "memberof": "src/token.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/token.js~CWTFromJSON",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/token.js",
+    "importStyle": null,
+    "description": "Parse a JSON string into a CWT object",
+    "lineNumber": 205,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "jsonString",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "CWT",
+        "null"
+      ],
+      "spread": false,
+      "description": "Return a CWT object or null if the JSON does not represent a valid Consent Web Token"
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "function",
+    "name": "CWTFromBase64",
+    "memberof": "src/token.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/token.js~CWTFromBase64",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/token.js",
+    "importStyle": null,
+    "description": "Parse a base64-encoded JSON string into a CWT object",
+    "lineNumber": 227,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "base64String",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "CWT",
+        "null"
+      ],
+      "spread": false,
+      "description": "Return a CWT object or null if the string does not represent a valid Consent Web Token"
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "variable",
+    "name": "Purposes",
+    "memberof": "src/token.js",
+    "static": true,
+    "longname": "src/token.js~Purposes",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/token.js",
+    "importStyle": null,
+    "description": "List of standard GDPR purposes\n\nThis list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.",
+    "lineNumber": 240,
+    "type": {
+      "types": [
+        "{\"Cookies\": string}"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "file",
+    "name": "src/vendor.js",
+    "content": "/**\n * Vendor\n *\n * A vendor for which consent can be collected\n *\n * @ignore\n */\nclass Vendor {\n  constructor(id, scopes = []) {\n    this.id = id;\n    this.scopes = scopes;\n  }\n\n  static fromObject(object) {\n    if (!object) {\n      return null;\n    }\n\n    if (\n      typeof object.id !== 'string'\n      || !object.id\n    ) {\n      return null;\n    }\n\n    return new Vendor(\n      object.id,\n      Array.isArray(object.scopes) ? object.scopes : []\n    );\n  }\n\n  addScope(scopeId) {\n    if (!scopeId) {\n      return;\n    }\n\n    if (this.scopes.indexOf(scopeId) !== -1) {\n      return;\n    }\n\n    this.scopes.push(scopeId);\n  }\n\n  hasScope(scopeId, global = true) {\n    if (global && this.scopes.indexOf('*') !== -1) {\n      // Global scope, all scopes are set to true\n      return true;\n    }\n\n    return this.scopes.indexOf(scopeId) !== -1;\n  }\n}\n\nmodule.exports = { Vendor };\n",
+    "static": true,
+    "longname": "C:/Users/Jawad/Documents/Development/didomi/cwt-node/src/vendor.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 78,
+    "kind": "class",
+    "name": "Vendor",
+    "memberof": "src/vendor.js",
+    "static": true,
+    "longname": "src/vendor.js~Vendor",
+    "access": "public",
+    "export": false,
+    "importPath": "cwt/src/vendor.js",
+    "importStyle": null,
+    "description": "Vendor\n\nA vendor for which consent can be collected",
+    "lineNumber": 8,
+    "ignore": true,
+    "interface": false
+  },
+  {
+    "__docId__": 79,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/vendor.js~Vendor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/vendor.js~Vendor#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "member",
+    "name": "id",
+    "memberof": "src/vendor.js~Vendor",
+    "static": false,
+    "longname": "src/vendor.js~Vendor#id",
+    "access": "public",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "member",
+    "name": "scopes",
+    "memberof": "src/vendor.js~Vendor",
+    "static": false,
+    "longname": "src/vendor.js~Vendor#scopes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "fromObject",
+    "memberof": "src/vendor.js~Vendor",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/vendor.js~Vendor.fromObject",
+    "access": "public",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "params": [
+      {
+        "name": "object",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "addScope",
+    "memberof": "src/vendor.js~Vendor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/vendor.js~Vendor#addScope",
+    "access": "public",
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "params": [
+      {
+        "name": "scopeId",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 84,
+    "kind": "method",
+    "name": "hasScope",
+    "memberof": "src/vendor.js~Vendor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/vendor.js~Vendor#hasScope",
+    "access": "public",
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "params": [
+      {
+        "name": "scopeId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "global",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "index",
+    "content": "# cwt-node\n[![Build Status](https://travis-ci.org/didomi/cwt-node.svg?branch=master)](https://travis-ci.org/didomi/cwt-node)\n[![Coverage Status](https://coveralls.io/repos/github/didomi/cwt-node/badge.svg?branch=master)](https://coveralls.io/github/didomi/cwt-node?branch=master)\n",
+    "longname": "C:\\Users\\Jawad\\Documents\\Development\\didomi\\cwt-node\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"cwt\",\n  \"description\": \"Consent web token implementation for node.js and the browser\",\n  \"homepage\": \"https://www.consentwebtoken.io/\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/didomi/cwt-node.git\"\n  },\n  \"keywords\": [\n    \"consent\",\n    \"token\",\n    \"cwt\",\n    \"gdpr\"\n  ],\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/didomi/cwt-node/issues\"\n  },\n  \"main\": \"src\",\n  \"directories\": {\n    \"lib\": \"src\",\n    \"test\": \"test/\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha test/ --recursive\",\n    \"coverage\": \"nyc --reporter=html --reporter=text-summary --reporter=lcov --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive\",\n    \"lint\": \"eslint src/. test/.\",\n    \"docs\": \"esdoc\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"chai\": \"^4.0.2\",\n    \"coveralls\": \"^3.0.0\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.0.0\",\n    \"eslint-config-airbnb-base\": \"^11.2.0\",\n    \"eslint-plugin-import\": \"^2.3.0\",\n    \"eslint-plugin-mocha\": \"^4.11.0\",\n    \"mocha\": \"^3.4.2\",\n    \"nyc\": \"^11.0.2\"\n  }\n}\n",
+    "longname": "C:\\Users\\Jawad\\Documents\\Development\\didomi\\cwt-node\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

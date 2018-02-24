@@ -1,0 +1,34 @@
+{
+  "coverage": "69.69%",
+  "expectCount": 33,
+  "actualCount": 23,
+  "files": {
+    "src/consent.js": {
+      "expectCount": 8,
+      "actualCount": 4,
+      "undocumentLines": [
+        27,
+        28,
+        50,
+        54
+      ]
+    },
+    "src/token.js": {
+      "expectCount": 18,
+      "actualCount": 18,
+      "undocumentLines": []
+    },
+    "src/vendor.js": {
+      "expectCount": 7,
+      "actualCount": 1,
+      "undocumentLines": [
+        9,
+        10,
+        11,
+        14,
+        32,
+        44
+      ]
+    }
+  }
+}

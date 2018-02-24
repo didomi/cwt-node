@@ -1,7 +1,47 @@
-/**
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/token.js | cwt</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Consent web token implementation for node.js and the browser"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cwt"><meta property="twitter:description" content="Consent web token implementation for node.js and the browser"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/didomi/cwt-node"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/token.js~CWT.html">CWT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CWTFromBase64">CWTFromBase64</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-CWTFromJSON">CWTFromJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Purposes">Purposes</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/token.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
  * @ignore
  */
-const { Consent } = require('./consent');
+const { Consent } = require(&apos;./consent&apos;);
 
 /**
  * A consent web token represents the GDPR consents expressed by a user.
@@ -9,9 +49,9 @@ const { Consent } = require('./consent');
  *
  * @example
  * const token = new CWT(
- *   'issuer',
- *   'user@domain.com',
- *   'email'
+ *   &apos;issuer&apos;,
+ *   &apos;user@domain.com&apos;,
+ *   &apos;email&apos;
  * );
  */
 class CWT {
@@ -102,7 +142,7 @@ class CWT {
    * @return {string}
    */
   toBase64() {
-    return new Buffer(this.toJSON()).toString('base64');
+    return new Buffer(this.toJSON()).toString(&apos;base64&apos;);
   }
 
   /**
@@ -113,11 +153,11 @@ class CWT {
    * @param {string} [scopeId] The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope.
    *
    * @example
-   * const token = new CWT('issuer');
+   * const token = new CWT(&apos;issuer&apos;);
    * token.addConsent(
    *   CWT.Purposes.Cookies,
-   *   'didomi',
-   *   '*'
+   *   &apos;didomi&apos;,
+   *   &apos;*&apos;
    * );
    */
   addConsent(purpose, vendorId, scopeId = null) {
@@ -138,7 +178,7 @@ class CWT {
    * @return {Consent} The `Consent` object for the purpose or `null` if there is no consent for that purpose
    */
   getConsent(purpose) {
-    return this.consents.find(c => c.purpose === purpose);
+    return this.consents.find(c =&gt; c.purpose === purpose);
   }
 
   /**
@@ -146,7 +186,7 @@ class CWT {
    *
    * If the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.
    * Make sure that you provide a vendor or scope to match the level of compliance you are targeting.
-   * For instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.
+   * For instance, if you want to make sure that the user has given the most specific purpose, you&apos;ll want to include both the vendor and the scope in your query.
    *
    * @param {string} purpose Purpose
    * @param {string} [vendorId] Unique ID of the vendor to check consent for
@@ -154,9 +194,9 @@ class CWT {
    * @return {boolean}
    *
    * @example
-   * const token = new CWT('issuer');
-   * token.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');
-   * token.hasConsent(CWT.Purposes.Cookies, 'didomi');
+   * const token = new CWT(&apos;issuer&apos;);
+   * token.addConsent(CWT.Purposes.Cookies, &apos;didomi&apos;, &apos;.didomi.io&apos;);
+   * token.hasConsent(CWT.Purposes.Cookies, &apos;didomi&apos;);
    */
   hasConsent(purpose, vendorId = null, scopeId = null) {
     const consent = this.getConsent(purpose);
@@ -175,7 +215,7 @@ class CWT {
 
       if (!vendor) {
         // Check if consent was given all vendors
-        vendor = consent.getVendor('*');
+        vendor = consent.getVendor(&apos;*&apos;);
 
         if (!vendor) {
           // Still no vendor
@@ -188,7 +228,7 @@ class CWT {
         return true;
       }
 
-      // TODO: Check scope of * vs specific vendor if the scope doesn't match for one or the other
+      // TODO: Check scope of * vs specific vendor if the scope doesn&apos;t match for one or the other
       return vendor.hasScope(scopeId, false);
     }
 
@@ -229,7 +269,7 @@ function CWTFromBase64(base64String) {
     return null;
   }
 
-  return CWTFromJSON(new Buffer(base64String, 'base64').toString());
+  return CWTFromJSON(new Buffer(base64String, &apos;base64&apos;).toString());
 }
 
 /**
@@ -238,7 +278,7 @@ function CWTFromBase64(base64String) {
  * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.
  */
 const Purposes = {
-  Cookies: 'cookies',
+  Cookies: &apos;cookies&apos;,
 };
 
 module.exports = {
@@ -247,3 +287,20 @@ module.exports = {
   CWTFromJSON,
   Purposes,
 };
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

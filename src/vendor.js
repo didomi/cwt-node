@@ -1,3 +1,10 @@
+/**
+ * Vendor
+ *
+ * A vendor for which consent can be collected
+ *
+ * @ignore
+ */
 class Vendor {
   constructor(id, scopes = []) {
     this.id = id;

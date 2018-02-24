@@ -1,5 +1,5 @@
 {
-  "name": "consentwebtoken",
+  "name": "@didomi/consentwebtoken",
   "version": "1.0.0",
   "description": "Consent web token implementation for node.js and the browser",
   "homepage": "https://www.consentwebtoken.io/",
@@ -31,7 +31,7 @@
     "lint": "eslint src/. test/.",
     "docs": "esdoc",
     "build": "babel src --out-dir dist",
-    "publish": "npm build && npm publish ."
+    "release": "npm build && npm publish --access public"
   },
   "dependencies": {},
   "devDependencies": {

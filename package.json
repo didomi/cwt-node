@@ -1,0 +1,25 @@
+{
+  "name": "cwt",
+  "description": "Consent web token implementation for node.js and the browser",
+  "homepage": "https://www.consentwebtoken.io/",
+  "main": "src",
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "scripts": {
+    "test": "mocha test/ --recursive",
+    "coverage": "nyc --reporter=html --reporter=text-summary --check-coverage --lines 100 --functions 100 --branches 100 mocha test/ --recursive",
+    "lint": "eslint src/. test/."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.2"
+  }
+}

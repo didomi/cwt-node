@@ -8,11 +8,11 @@ const { Consent } = require('./consent');
  * It can be used for storage or to be shared with third-parties.
  *
  * @example
- * const token = new CWT(
- *   'issuer',
- *   'user@domain.com',
- *   'email'
- * );
+ * const token = new CWT({
+ *   issuer: 'issuer',
+ *   user_id: 'user@domain.com',
+ *   user_id_type: 'email'
+ * });
  */
 class CWT {
   /**

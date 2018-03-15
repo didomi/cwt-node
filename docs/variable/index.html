@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../">
-  <title data-ice="title">Variable | consentwebtoken</title>
+  <title data-ice="title">Variable | @didomi/consentwebtoken</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Consent web token implementation for node.js and the browser"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="consentwebtoken"><meta property="twitter:description" content="Consent web token implementation for node.js and the browser"></head>
+<meta name="description" content="Consent web token implementation for node.js and the browser"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@didomi/consentwebtoken"><meta property="twitter:description" content="Consent web token implementation for node.js and the browser"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -56,13 +56,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-Purposes">Purposes</a></span></span><span class="code" data-ice="signature">: {&quot;Cookies&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-Purposes">Purposes</a></span></span><span class="code" data-ice="signature">: {&quot;Cookies&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesAnalytics&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesMarketing&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesSocial&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;AdvertisingPersonalization&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;Analytics&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;ContentPersonalization&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;DeviceAccess&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;OfflineMatch&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;LinkDevices&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;PreciseGeo&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>List of standard GDPR purposes</p>
+        <div data-ice="description"><p>List of standard GDPR/ePrivacy purposes</p>
 </div>
       </div>
     </td>
@@ -84,7 +84,7 @@
     
     
     
-    <span class="code" data-ice="name">Purposes</span><span class="code" data-ice="signature">: {&quot;Cookies&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</span>
+    <span class="code" data-ice="name">Purposes</span><span class="code" data-ice="signature">: {&quot;Cookies&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesAnalytics&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesMarketing&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;CookiesSocial&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;AdvertisingPersonalization&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;Analytics&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;ContentPersonalization&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;DeviceAccess&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;OfflineMatch&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;LinkDevices&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;PreciseGeo&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</span>
     <span class="right-info">
       
       
@@ -95,8 +95,8 @@
   
   
   
-  <div data-ice="description"><p>List of standard GDPR purposes</p>
-<p>This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.</p>
+  <div data-ice="description"><p>List of standard GDPR/ePrivacy purposes</p>
+<p>This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know how to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.</p>
 </div>
 
   

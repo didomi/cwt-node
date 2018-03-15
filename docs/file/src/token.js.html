@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">src/token.js | consentwebtoken</title>
+  <title data-ice="title">src/token.js | @didomi/consentwebtoken</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Consent web token implementation for node.js and the browser"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="consentwebtoken"><meta property="twitter:description" content="Consent web token implementation for node.js and the browser"></head>
+<meta name="description" content="Consent web token implementation for node.js and the browser"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@didomi/consentwebtoken"><meta property="twitter:description" content="Consent web token implementation for node.js and the browser"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -48,11 +48,11 @@ const { Consent } = require(&apos;./consent&apos;);
  * It can be used for storage or to be shared with third-parties.
  *
  * @example
- * const token = new CWT(
- *   &apos;issuer&apos;,
- *   &apos;user@domain.com&apos;,
- *   &apos;email&apos;
- * );
+ * const token = new CWT({
+ *   issuer: &apos;issuer&apos;,
+ *   user_id: &apos;user@domain.com&apos;,
+ *   user_id_type: &apos;email&apos;
+ * });
  */
 class CWT {
   /**
@@ -274,12 +274,42 @@ function CWTFromBase64(base64String) {
 }
 
 /**
- * List of standard GDPR purposes
+ * List of standard GDPR/ePrivacy purposes
  *
- * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.
+ * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know how to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.
  */
 const Purposes = {
   Cookies: &apos;cookies&apos;,
+  CookiesAnalytics: &apos;cookies_analytics&apos;,
+  CookiesMarketing: &apos;cookies_marketing&apos;,
+  CookiesSocial: &apos;cookies_social&apos;,
+
+  /**
+   * Purposes from the IAB GDPR Transparency and consent framework
+   * From http://advertisingconsent.eu/wp-content/uploads/2018/03/Transparency_Consent_Framework_FAQ_Formatted_v1_8-March-2018.pdf
+   * Subject to change
+   */
+
+  // Advertising personalisation allow processing of a user&#x2019;s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user&#x2019;s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose
+  AdvertisingPersonalization: &apos;advertising_personalization&apos;,
+
+  // Analytics allow processing of a user&#x2019;s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose
+  Analytics: &apos;analytics&apos;,
+
+  // Content personalisation allow processing of a user&#x2019;s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user&#x2019;s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.
+  ContentPersonalization: &apos;content_personalization&apos;,
+
+  // Accessing a device allow storing or accessing information on a user&#x2019;s device
+  DeviceAccess: &apos;device_access&apos;,
+
+  // Matching data to offline sources combining data from offline sources that were initially collected in other contexts
+  OfflineMatch: &apos;offline_match&apos;,
+
+  // Linking devices allow processing of a user&#x2019;s data to connect such user across multiple devices
+  LinkDevices: &apos;link_devices&apos;,
+
+  // Precise geographic location data allow processing of a user&#x2019;s precise geographic location data in support of a purpose for which that certain third party has consent
+  PreciseGeo: &apos;precise_geo&apos;,
 };
 
 module.exports = {

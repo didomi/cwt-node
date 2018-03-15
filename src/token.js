@@ -234,12 +234,42 @@ function CWTFromBase64(base64String) {
 }
 
 /**
- * List of standard GDPR purposes
+ * List of standard GDPR/ePrivacy purposes
  *
- * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know of to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.
+ * This list is provided as part of the CWT specification but is not intended to be a complete/restrictive list. You are free to specify your own purposes. If you share tokens with third-parties though, they will need to know how to interpret your purpose IDs whereas you can expect them to know how to deal with the standard purposes provided here.
  */
 const Purposes = {
   Cookies: 'cookies',
+  CookiesAnalytics: 'cookies_analytics',
+  CookiesMarketing: 'cookies_marketing',
+  CookiesSocial: 'cookies_social',
+
+  /**
+   * Purposes from the IAB GDPR Transparency and consent framework
+   * From http://advertisingconsent.eu/wp-content/uploads/2018/03/Transparency_Consent_Framework_FAQ_Formatted_v1_8-March-2018.pdf
+   * Subject to change
+   */
+
+  // Advertising personalisation allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose
+  AdvertisingPersonalization: 'advertising_personalization',
+
+  // Analytics allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose
+  Analytics: 'analytics',
+
+  // Content personalisation allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.
+  ContentPersonalization: 'content_personalization',
+
+  // Accessing a device allow storing or accessing information on a user’s device
+  DeviceAccess: 'device_access',
+
+  // Matching data to offline sources combining data from offline sources that were initially collected in other contexts
+  OfflineMatch: 'offline_match',
+
+  // Linking devices allow processing of a user’s data to connect such user across multiple devices
+  LinkDevices: 'link_devices',
+
+  // Precise geographic location data allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent
+  PreciseGeo: 'precise_geo',
 };
 
 module.exports = {

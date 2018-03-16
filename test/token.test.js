@@ -82,171 +82,74 @@ describe('CWT - Token', function () {
       });
     });
 
-    describe('addConsent', function () {
-      it('adds a consent to a token', function () {
+    describe('setConsentStatus', function () {
+      it('sets consent status in a token', function () {
         const token = new CWT();
-
-        token.addConsent('cookies', 'vendor');
+        token.setConsentStatus(true, 'cookies', 'vendor');
 
         expect(token.consents).to.deep.equal([
           {
             purpose: 'cookies',
             vendors: [{
               id: 'vendor',
-              scopes: [],
+              status: true,
             }],
           },
         ]);
       });
 
-      it('adds a vendor to an existing consent', function () {
+      it('sets consent status even if there is already information for that purpose/vendor', function () {
         const token = new CWT({
           consents: [{
             purpose: 'cookies',
-            vendors: [],
+            vendors: [
+              {
+                id: 'vendor',
+                status: false,
+              },
+            ],
           }],
         });
 
-        token.addConsent('cookies', 'vendor');
+        token.setConsentStatus(true, 'cookies', 'vendor');
 
         expect(token.consents).to.deep.equal([
           {
             purpose: 'cookies',
             vendors: [{
               id: 'vendor',
-              scopes: [],
-            }],
-          },
-        ]);
-      });
-
-      it('adds a scope to an existing consent', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-              scopes: ['scope1'],
-            }],
-          }],
-        });
-
-        token.addConsent('cookies', 'vendor', 'scope2');
-
-        expect(token.consents).to.deep.equal([
-          {
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-              scopes: ['scope1', 'scope2'],
+              status: true,
             }],
           },
         ]);
       });
     });
 
-    describe('getConsent', function () {
-      it('returns a consent from the list', function () {
+    describe('getConsentStatus', function () {
+      it('returns a consent status from the list', function () {
         const token = new CWT();
-        token.addConsent('cookies', 'vendor');
+        token.setConsentStatus(true, 'cookies', 'vendor');
 
-        expect(token.getConsent('cookies')).to.deep.equal({
-          purpose: 'cookies',
-          vendors: [{
-            id: 'vendor',
-            scopes: [],
-          }],
-        });
+        expect(token.getConsentStatus('cookies', 'vendor')).to.deep.equal(true);
       });
 
-      it('returns null if there is no matching consent', function () {
+      it('returns a consent status from the vendor catch-all if it is present', function () {
         const token = new CWT();
-        expect(token.getConsent('cookies')).to.be.undefined;
-      });
-    });
+        token.setConsentStatus(true, 'cookies', '*');
 
-    describe('hasConsent', function () {
-      it('returns false if there is no matching consent', function () {
+        expect(token.getConsentStatus('cookies', 'vendor')).to.deep.equal(true);
+      });
+
+      it('returns undefined if there is no matching consent', function () {
         const token = new CWT();
-        expect(token.hasConsent('cookies')).to.be.false;
+        expect(token.getConsentStatus('cookies', 'vendor')).to.be.undefined;
       });
 
-      it('returns true if there is a matching consent and no vendor requirement', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [],
-          }],
-        });
+      it('returns undefined if there is no matching vendor', function () {
+        const token = new CWT();
+        token.setConsentStatus(true, 'cookies', 'vendor2');
 
-        expect(token.hasConsent('cookies')).to.be.true;
-      });
-
-      it('returns true if consent has been given for a specific vendor', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-            }],
-          }],
-        });
-
-        expect(token.hasConsent('cookies', 'vendor')).to.be.true;
-      });
-
-      it('returns true if consent has been given for all vendors', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: '*',
-            }],
-          }],
-        });
-
-        expect(token.hasConsent('cookies', 'vendor')).to.be.true;
-      });
-
-      it('returns false if consent has been given but not for our vendor', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-            }],
-          }],
-        });
-
-        expect(token.hasConsent('cookies', 'vendor-not-matching')).to.be.false;
-      });
-
-      it('returns true if consent has been given for a specific vendor and the right scope', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-              scopes: ['scope'],
-            }],
-          }],
-        });
-
-        expect(token.hasConsent('cookies', 'vendor', 'scope')).to.be.true;
-      });
-
-      it('returns false if consent has been given for a specific vendor but not the right scope', function () {
-        const token = new CWT({
-          consents: [{
-            purpose: 'cookies',
-            vendors: [{
-              id: 'vendor',
-              scopes: ['*'],
-            }],
-          }],
-        });
-
-        expect(token.hasConsent('cookies', 'vendor', 'scope')).to.be.false;
+        expect(token.getConsentStatus('cookies', 'vendor')).to.be.undefined;
       });
     });
   });

@@ -57,11 +57,11 @@ const token = new CWT({
 });
 
 // Add a few consents
-token.addConsent(Purposes.Cookies, &apos;didomi&apos;);
-token.addConsent(Purposes.Cookies, &apos;liveramp&apos;);
+token.setConsentStatus(true, Purposes.Cookies, &apos;didomi&apos;);
+token.setConsentStatus(true, Purposes.Cookies, &apos;liveramp&apos;);
 
-// Check what consents have been set for the user
-token.hasConsent(Purposes.Cookies, &apos;didomi&apos;);
+// Check what the consent status of a given purpose
+token.getConsentStatus(Purposes.Cookies, &apos;didomi&apos;);
 
 // Encode the token for storage
 token.toJSON();</code>
@@ -78,6 +78,23 @@ token.toJSON();</code>
 </code></pre>
 <p>The package has no peer dependency.</p>
 <h2 id="documentation">Documentation</h2><p>The API documentation is available here: <a href="https://didomi.github.io/cwt-node/class/src/token.js~CWT.html">https://didomi.github.io/cwt-node/class/src/token.js~CWT.html</a></p>
+<p>A Consent Web Token is a very simple data structure. Example:</p>
+<pre><code class="lang-json"><code class="source-code prettyprint">{
+    user_id: &apos;user@email.com&apos;,
+    user_id_type: &apos;email&apos;,
+    consents: [
+        {
+            purpose: &apos;cookies&apos;,
+            vendors: [
+                {
+                    id: &apos;didomi&apos;,
+                    status: true,
+                }
+            ]
+        }
+    ]
+}</code>
+</code></pre>
 <h2 id="license">License</h2><p>MIT. See <a href="LICENSE">LICENSE</a>.</p>
 <h2 id="sponsor">Sponsor</h2><p><a href="https://www.didomi.io">
     <img src="https://www.didomi.io/wp-content/uploads/2017/01/cropped-didomi-horizontal-1.png" width="200">

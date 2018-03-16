@@ -22,11 +22,11 @@ const token = new CWT({
 });
 
 // Add a few consents
-token.addConsent(Purposes.Cookies, 'didomi');
-token.addConsent(Purposes.Cookies, 'liveramp');
+token.setConsentStatus(true, Purposes.Cookies, 'didomi');
+token.setConsentStatus(true, Purposes.Cookies, 'liveramp');
 
-// Check what consents have been set for the user
-token.hasConsent(Purposes.Cookies, 'didomi');
+// Check what the consent status of a given purpose
+token.getConsentStatus(Purposes.Cookies, 'didomi');
 
 // Encode the token for storage
 token.toJSON();
@@ -52,6 +52,26 @@ The package has no peer dependency.
 ## Documentation
 
 The API documentation is available here: https://didomi.github.io/cwt-node/class/src/token.js~CWT.html
+
+A Consent Web Token is a very simple data structure. Example:
+
+```json
+{
+    user_id: 'user@email.com',
+    user_id_type: 'email',
+    consents: [
+        {
+            purpose: 'cookies',
+            vendors: [
+                {
+                    id: 'didomi',
+                    status: true,
+                }
+            ]
+        }
+    ]
+}
+```
 
 ## License
 

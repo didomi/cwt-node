@@ -1,9 +1,4 @@
 /**
- * @ignore
- */
-const { Consent } = require('./consent');
-
-/**
  * A consent web token represents the GDPR consents expressed by a user.
  * It can be used for storage or to be shared with third-parties.
  *
@@ -61,7 +56,7 @@ class CWT {
      *
      * @type {Object[]}
      */
-    this.consents = (tokenContent.consents || []).map(Consent.fromObject);
+    this.consents = tokenContent.consents || [];
 
     /**
      * The CWT specification version
@@ -107,93 +102,82 @@ class CWT {
   }
 
   /**
-   * Add a consent given by the user
+   * Set the consent status for the user
    *
+   * @param {string} status The consent status (yes/no) of the user for the vendor
    * @param {string} purpose The purpose for which the user has given consent
    * @param {string} vendorId The unique vendor ID for which the user has given consent. Use `*` to indicate that the user has given consent for all vendors)
-   * @param {string} [scopeId] The scope for which the user has given consent (example: email, website, a unique internal ID, etc.). This is used to further limit the consent to a specific context as needed. It allows doing local (one website) vs global (all websites) consents easily. Use `*` to indicate that the user has given consent for any scope.
    *
    * @example
    * const token = new CWT('issuer');
-   * token.addConsent(
+   * token.setConsentStatus(
+   *   true,
    *   CWT.Purposes.Cookies,
-   *   'didomi',
-   *   '*'
+   *   'didomi'
    * );
    */
-  addConsent(purpose, vendorId, scopeId = null) {
-    let consent = this.getConsent(purpose);
+  setConsentStatus(status, purpose, vendorId) {
+    // Check if we already have consent information for that purpose
+    let consent = this.consents.find(c => c.purpose === purpose);
 
     if (!consent) {
-      consent = new Consent(purpose);
+      consent = {
+        purpose,
+        vendors: [],
+      };
+
       this.consents.push(consent);
     }
 
-    consent.addVendor(vendorId, scopeId);
+    // Check if we already have the vendor for that consent
+    let vendor = consent.vendors.find(v => v.id === vendorId);
+
+    if (!vendor) {
+      vendor = {
+        id: vendorId,
+        status: undefined,
+      };
+
+      consent.vendors.push(vendor);
+    }
+
+    vendor.status = status;
   }
 
   /**
-   * Get the consent given by a user for a given purpose
+   * Get the consent status of the user for a specific purpose/vendor
    *
-   * @param {string} purpose
-   * @return {Consent} The `Consent` object for the purpose or `null` if there is no consent for that purpose
-   */
-  getConsent(purpose) {
-    return this.consents.find(c => c.purpose === purpose);
-  }
-
-  /**
-   * Check if the user has given consent for a specific purpose, vendor and scope
-   *
-   * If the vendor or the scope are not provided, the function ignores them and simply checks if consent has been given for the purpose.
-   * Make sure that you provide a vendor or scope to match the level of compliance you are targeting.
-   * For instance, if you want to make sure that the user has given the most specific purpose, you'll want to include both the vendor and the scope in your query.
+   * Returns true if consent has been given, false if consent has been denied and undefined if no consent information is available
    *
    * @param {string} purpose Purpose
-   * @param {string} [vendorId] Unique ID of the vendor to check consent for
-   * @param {string} [scopeId] Scope to check consent for
+   * @param {string} vendorId Unique ID of the vendor to check consent for
    * @return {boolean}
    *
    * @example
    * const token = new CWT('issuer');
-   * token.addConsent(CWT.Purposes.Cookies, 'didomi', '.didomi.io');
-   * token.hasConsent(CWT.Purposes.Cookies, 'didomi');
+   * token.setConsentStatus(CWT.Purposes.Cookies, 'didomi');
+   * token.getConsentStatus(CWT.Purposes.Cookies, 'didomi');
    */
-  hasConsent(purpose, vendorId = null, scopeId = null) {
-    const consent = this.getConsent(purpose);
+  getConsentStatus(purpose, vendorId) {
+    const consent = this.consents.find(c => c.purpose === purpose);
 
     if (consent) {
-      // Consent found for that purpose
+      // Consent information found for that purpose
 
-      if (!vendorId) {
-        // We were not asked to check for a specific vendor
-        // TODO: Check scope here
-        return true;
+      // Check if we have consent information for the specific vendor
+      const vendor = consent.vendors.find(v => v.id === vendorId);
+      if (vendor) {
+        return vendor.status;
       }
 
-      // Check if consent was given for the specific vendor
-      let vendor = consent.getVendor(vendorId);
-
-      if (!vendor) {
-        // Check if consent was given all vendors
-        vendor = consent.getVendor('*');
-
-        if (!vendor) {
-          // Still no vendor
-          return false;
-        }
+      // We do not have consent information for that vendor, check if we have some for '*' (all vendors)
+      const vendorCatchAll = consent.vendors.find(v => v.id === '*');
+      if (vendorCatchAll) {
+        return vendorCatchAll.status;
       }
-
-      if (!scopeId) {
-        // No scope to check
-        return true;
-      }
-
-      // TODO: Check scope of * vs specific vendor if the scope doesn't match for one or the other
-      return vendor.hasScope(scopeId, false);
     }
 
-    return false;
+    return undefined;
   }
 }
 

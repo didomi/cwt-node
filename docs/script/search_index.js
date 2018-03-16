@@ -306,22 +306,10 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/consent.js",
-    "file/src/consent.js.html",
-    "src/consent.js",
-    "file"
-  ],
-  [
     "src/token.js",
     "file/src/token.js.html",
     "src/token.js",
     "file"
-  ],
-  [
-    "src/token.js~cwt#addconsent",
-    "class/src/token.js~CWT.html#instance-method-addConsent",
-    "src/token.js~CWT#addConsent",
-    "method"
   ],
   [
     "src/token.js~cwt#consents",
@@ -336,15 +324,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/token.js~cwt#getconsent",
-    "class/src/token.js~CWT.html#instance-method-getConsent",
-    "src/token.js~CWT#getConsent",
-    "method"
-  ],
-  [
-    "src/token.js~cwt#hasconsent",
-    "class/src/token.js~CWT.html#instance-method-hasConsent",
-    "src/token.js~CWT#hasConsent",
+    "src/token.js~cwt#getconsentstatus",
+    "class/src/token.js~CWT.html#instance-method-getConsentStatus",
+    "src/token.js~CWT#getConsentStatus",
     "method"
   ],
   [
@@ -352,6 +334,12 @@ window.esdocSearchIndex = [
     "class/src/token.js~CWT.html#instance-member-issuer",
     "src/token.js~CWT#issuer",
     "member"
+  ],
+  [
+    "src/token.js~cwt#setconsentstatus",
+    "class/src/token.js~CWT.html#instance-method-setConsentStatus",
+    "src/token.js~CWT#setConsentStatus",
+    "method"
   ],
   [
     "src/token.js~cwt#tobase64",
@@ -394,11 +382,5 @@ window.esdocSearchIndex = [
     "class/src/token.js~CWT.html#instance-member-version",
     "src/token.js~CWT#version",
     "member"
-  ],
-  [
-    "src/vendor.js",
-    "file/src/vendor.js.html",
-    "src/vendor.js",
-    "file"
   ]
 ]

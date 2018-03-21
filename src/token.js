@@ -28,28 +28,28 @@ class CWT {
      *
      * @type {string}
      */
-    this.issuer = tokenContent.issuer;
+    this.issuer = tokenContent.issuer || null;
 
     /**
      * The ID of the user that owns the token
      *
      * @type {string}
      */
-    this.user_id = tokenContent.user_id;
+    this.user_id = tokenContent.user_id || null;
 
     /**
      * The type of ID (email, uuid, adid, etc.)
      *
      * @type {string}
      */
-    this.user_id_type = tokenContent.user_id_type;
+    this.user_id_type = tokenContent.user_id_type || null;
 
     /**
      * If the user ID is hashed, this is the method used for generating the hash (md5, sha1, sha256)
      *
      * @type {string}
      */
-    this.user_id_hash_method = tokenContent.user_id_hash_method;
+    this.user_id_hash_method = tokenContent.user_id_hash_method || null;
 
     /**
      * A list of consents already given by the user

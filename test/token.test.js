@@ -52,6 +52,29 @@ describe('CWT - Token', function () {
   });
 
   describe('CWT', function () {
+    it('sets default values', function () {
+      expect(new CWT()).to.deep.equal({
+        issuer: null,
+        user_id: null,
+        user_id_type: null,
+        user_id_hash_method: null,
+        consents: [],
+        version: 1,
+      });
+
+      expect(new CWT({
+        issuer: 'didomi',
+        consents: null,
+      })).to.deep.equal({
+        issuer: 'didomi',
+        user_id: null,
+        user_id_type: null,
+        user_id_hash_method: null,
+        consents: [],
+        version: 1,
+      });
+    });
+
     describe('toJSON', function () {
       it('returns a JSON-encoded string', function () {
         const object = {

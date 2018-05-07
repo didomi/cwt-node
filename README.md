@@ -64,8 +64,16 @@ A Consent Web Token is a very simple data structure. Example:
             purpose: 'cookies',
             vendors: [
                 {
-                    id: 'didomi',
-                    status: true,
+                  id: '*',
+                  status: true
+                }
+                {
+                  id: 'didomi',
+                  status: true
+                },
+                {
+                  id: 'other-vendor',
+                  status: false
                 }
             ]
         }

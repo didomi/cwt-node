@@ -1,3 +1,5 @@
+const base64 = require('base-64');
+
 /**
  * A consent web token represents the GDPR consents expressed by a user.
  * It can be used for storage or to be shared with third-parties.
@@ -98,7 +100,7 @@ class CWT {
    * @return {string}
    */
   toBase64() {
-    return new Buffer(this.toJSON()).toString('base64');
+    return base64.encode(this.toJSON());
   }
 
   /**
@@ -214,7 +216,11 @@ function CWTFromBase64(base64String) {
     return null;
   }
 
-  return CWTFromJSON(new Buffer(base64String, 'base64').toString());
+  try {
+    return CWTFromJSON(base64.decode(base64String));
+  } catch (e) {
+    return null;
+  }
 }
 
 /**

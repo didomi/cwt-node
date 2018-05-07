@@ -1,6 +1,6 @@
 {
   "name": "@didomi/consentwebtoken",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Consent web token implementation for node.js and the browser",
   "homepage": "https://www.consentwebtoken.io/",
   "repository": {
@@ -33,10 +33,13 @@
     "build": "babel src --out-dir dist",
     "release": "npm run build && npm publish --access public"
   },
-  "dependencies": {},
+  "peerDependencies": {
+    "base-64": "^0.1.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "base-64": "^0.1.0",
     "chai": "^4.0.2",
     "coveralls": "^3.0.0",
     "esdoc": "^1.0.4",

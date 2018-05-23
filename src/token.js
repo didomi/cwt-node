@@ -120,13 +120,15 @@ class CWT {
     const vendorsByPurpose = {};
 
     // Find purposes that are all false (ie disabled purposes)
-    for (const consent of token.consents) {
-      const { purpose, vendors } = consent;
+    for (const consentIndex in token.consents) {
+      const { purpose, vendors } = token.consents[consentIndex];
 
       vendorsByPurpose[purpose] = {};
 
       let disabledPurpose = true;
-      for (const vendor of vendors) {
+      for (const vendorIndex in vendors) {
+        const vendor = vendors[vendorIndex];
+
         disabledPurpose = disabledPurpose && vendor.status === false;
 
         if (!statusByVendor[vendor.id]) {
@@ -150,10 +152,14 @@ class CWT {
 
     // Find vendors that have all true for enabled purposes and set them to true
     // Set the other vendors to false
-    for (const vendorIdString of Object.keys(statusByVendor)) {
+    const vendorIdStrings = Object.keys(statusByVendor);
+    for (const vendorIdStringIndex in vendorIdStrings) {
+      const vendorIdString = vendorIdStrings[vendorIdStringIndex];
       let enabledVendor = true;
 
-      for (const purposeId of serializedToken.purposes.enabled) {
+      for (const purposeIdIndex in serializedToken.purposes.enabled) {
+        const purposeId = serializedToken.purposes.enabled[purposeIdIndex];
+
         enabledVendor = enabledVendor
           && statusByVendor[vendorIdString].purposes[purposeId] === true;
       }
@@ -330,22 +336,34 @@ function CWTFromCompressedJSON(jsonString) {
     version: object.version,
   });
 
-  for (const purposeId of object.purposes.enabled) {
-    for (const vendorId of object.vendors.enabled) {
+  for (const purposeIdIndex in object.purposes.enabled) {
+    const purposeId = object.purposes.enabled[purposeIdIndex];
+
+    for (const vendorIdIndex in object.vendors.enabled) {
+      const vendorId = object.vendors.enabled[vendorIdIndex];
+
       token.setConsentStatus(true, purposeId, vendorId);
     }
 
-    for (const vendorId of object.vendors.disabled) {
+    for (const vendorIdIndex in object.vendors.disabled) {
+      const vendorId = object.vendors.disabled[vendorIdIndex];
+
       token.setConsentStatus(false, purposeId, vendorId);
     }
   }
 
-  for (const purposeId of object.purposes.disabled) {
-    for (const vendorId of object.vendors.enabled) {
+  for (const purposeIdIndex in object.purposes.disabled) {
+    const purposeId = object.purposes.disabled[purposeIdIndex];
+
+    for (const vendorIdIndex in object.vendors.enabled) {
+      const vendorId = object.vendors.enabled[vendorIdIndex];
+
       token.setConsentStatus(false, purposeId, vendorId);
     }
 
-    for (const vendorId of object.vendors.disabled) {
+    for (const vendorIdIndex in object.vendors.disabled) {
+      const vendorId = object.vendors.disabled[vendorIdIndex];
+
       token.setConsentStatus(false, purposeId, vendorId);
     }
   }

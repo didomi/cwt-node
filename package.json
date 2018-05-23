@@ -1,6 +1,6 @@
 {
   "name": "@didomi/consentwebtoken",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Consent web token implementation for node.js and the browser",
   "homepage": "https://www.consentwebtoken.io/",
   "repository": {

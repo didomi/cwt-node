@@ -94,13 +94,90 @@ class CWT {
   }
 
   /**
+   * Generate a space-efficient JSON CWT with less information
+   */
+  toCompressedJSON() {
+    const token = this.toObject();
+
+    const serializedToken = {
+      issuer: token.issuer,
+      user_id: token.user_id,
+      user_id_type: token.user_id_type,
+      user_id_hash_method: token.user_id_hash_method,
+      version: token.version,
+    };
+
+    serializedToken.purposes = {
+      enabled: [],
+      disabled: [],
+    };
+    serializedToken.vendors = {
+      enabled: [],
+      disabled: [],
+    };
+
+    const statusByVendor = {};
+    const vendorsByPurpose = {};
+
+    // Find purposes that are all false (ie disabled purposes)
+    for (const consent of token.consents) {
+      const { purpose, vendors } = consent;
+
+      vendorsByPurpose[purpose] = {};
+
+      let disabledPurpose = true;
+      for (const vendor of vendors) {
+        disabledPurpose = disabledPurpose && vendor.status === false;
+
+        if (!statusByVendor[vendor.id]) {
+          statusByVendor[vendor.id] = {};
+        }
+
+        statusByVendor[vendor.id][purpose] = vendor.status;
+        vendorsByPurpose[purpose][vendor.id] = vendor.status;
+      }
+
+      if (disabledPurpose) {
+        // All vendors are set to false for this purpose, which means the purpose itself should be false
+        serializedToken.purposes.disabled.push(purpose);
+      } else {
+        serializedToken.purposes.enabled.push(purpose);
+      }
+    }
+
+    // Find vendors that have all true for enabled purposes and set them to true
+    // Set the other vendors to false
+    for (const vendorId of Object.keys(statusByVendor)) {
+      let enabledVendor = true;
+
+      for (const purposeId of serializedToken.purposes.enabled) {
+        enabledVendor = enabledVendor
+          && statusByVendor[vendorId][purposeId] === true;
+      }
+
+      if (enabledVendor) {
+        serializedToken.vendors.enabled.push(vendorId);
+      } else {
+        serializedToken.vendors.disabled.push(vendorId);
+      }
+    }
+
+    return JSON.stringify(serializedToken);
+  }
+
+  /**
    * Generate a base64-encoded version of the token
    * It first encode the token as JSON then base64-encode it.
-   *
-   * @return {string}
    */
   toBase64() {
     return base64.encode(this.toJSON());
+  }
+
+  /**
+   * Generate a base64-encoded version of compressed JSON token
+   */
+  toCompressedBase64() {
+    return base64.encode(this.toCompressedJSON());
   }
 
   /**
@@ -202,7 +279,75 @@ function CWTFromJSON(jsonString) {
     return null;
   }
 
+  if (object.purposes || object.vendors) {
+    // It's a compressed JSON, do not use it
+    return null;
+  }
+
   return new CWT(object);
+}
+
+/**
+ * Parse a compressed JSON string into a CWT object
+ *
+ * @param {string} jsonString
+ * @return {CWT|null} Return a CWT object or null if the JSON does not represent a valid Consent Web Token
+ */
+function CWTFromCompressedJSON(jsonString) {
+  if (!jsonString) {
+    return null;
+  }
+
+  let object;
+
+  try {
+    object = JSON.parse(jsonString);
+  } catch (error) {
+    return null;
+  }
+
+  if (
+    object.consents
+    || !object.purposes
+    || !object.vendors
+    || !object.purposes.enabled
+    || !object.purposes.disabled
+    || !object.vendors.enabled
+    || !object.vendors.disabled
+  ) {
+    return null;
+  }
+
+  const token = new CWT({
+    issuer: object.issuer,
+    user_id: object.user_id,
+    user_id_type: object.user_id_type,
+    user_id_hash_method: object.user_id_hash_method,
+    consents: [],
+    version: object.version,
+  });
+
+  for (const purposeId of object.purposes.enabled) {
+    for (const vendorId of object.vendors.enabled) {
+      token.setConsentStatus(true, purposeId, vendorId);
+    }
+
+    for (const vendorId of object.vendors.disabled) {
+      token.setConsentStatus(false, purposeId, vendorId);
+    }
+  }
+
+  for (const purposeId of object.purposes.disabled) {
+    for (const vendorId of object.vendors.enabled) {
+      token.setConsentStatus(false, purposeId, vendorId);
+    }
+
+    for (const vendorId of object.vendors.disabled) {
+      token.setConsentStatus(false, purposeId, vendorId);
+    }
+  }
+
+  return token;
 }
 
 /**
@@ -218,6 +363,24 @@ function CWTFromBase64(base64String) {
 
   try {
     return CWTFromJSON(base64.decode(base64String));
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Parse a base64-encoded JSON string into a CWT object
+ *
+ * @param {string} base64String
+ * @return {CWT|null} Return a CWT object or null if the string does not represent a valid Consent Web Token
+ */
+function CWTFromCompressedBase64(base64String) {
+  if (!base64String) {
+    return null;
+  }
+
+  try {
+    return CWTFromCompressedJSON(base64.decode(base64String));
   } catch (e) {
     return null;
   }
@@ -265,6 +428,8 @@ const Purposes = {
 module.exports = {
   CWT,
   CWTFromBase64,
+  CWTFromCompressedBase64,
   CWTFromJSON,
+  CWTFromCompressedJSON,
   Purposes,
 };

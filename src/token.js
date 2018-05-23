@@ -130,10 +130,13 @@ class CWT {
         disabledPurpose = disabledPurpose && vendor.status === false;
 
         if (!statusByVendor[vendor.id]) {
-          statusByVendor[vendor.id] = {};
+          statusByVendor[vendor.id] = {
+            id: vendor.id,
+            purposes: {},
+          };
         }
 
-        statusByVendor[vendor.id][purpose] = vendor.status;
+        statusByVendor[vendor.id].purposes[purpose] = vendor.status;
         vendorsByPurpose[purpose][vendor.id] = vendor.status;
       }
 
@@ -147,18 +150,18 @@ class CWT {
 
     // Find vendors that have all true for enabled purposes and set them to true
     // Set the other vendors to false
-    for (const vendorId of Object.keys(statusByVendor)) {
+    for (const vendorIdString of Object.keys(statusByVendor)) {
       let enabledVendor = true;
 
       for (const purposeId of serializedToken.purposes.enabled) {
         enabledVendor = enabledVendor
-          && statusByVendor[vendorId][purposeId] === true;
+          && statusByVendor[vendorIdString].purposes[purposeId] === true;
       }
 
       if (enabledVendor) {
-        serializedToken.vendors.enabled.push(vendorId);
+        serializedToken.vendors.enabled.push(statusByVendor[vendorIdString].id);
       } else {
-        serializedToken.vendors.disabled.push(vendorId);
+        serializedToken.vendors.disabled.push(statusByVendor[vendorIdString].id);
       }
     }
 

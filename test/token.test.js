@@ -1,5 +1,13 @@
 const expect = require('chai').expect;
-const { CWT, CWTFromBase64, CWTFromCompressedBase64, CWTFromCompressedJSON, CWTFromJSON } = require('../src/token');
+const {
+  CWT,
+  CWTFromBase64,
+  CWTFromCompressedBase64,
+  CWTFromCompressedJSON,
+  CWTFromJSON,
+  toV2Compressed,
+  toV2NonCompressed,
+} = require('../src/token');
 
 describe('CWT - Token', function () {
   describe('CWTFromJSON', function () {
@@ -10,12 +18,12 @@ describe('CWT - Token', function () {
         user_id_type: 'email',
         user_id_hash_method: null,
         consents: [],
-        version: 1,
+        version: 2,
       };
 
       const token = CWTFromJSON(JSON.stringify(object));
 
-      expect(token).to.deep.equal(Object.assign(object, { version: 1 }));
+      expect(token).to.deep.equal(Object.assign(object, { version: 2 }));
     });
 
     it('Generates a CWT object from a JSON string', function () {
@@ -33,12 +41,12 @@ describe('CWT - Token', function () {
             }],
           },
         ],
-        version: 1,
+        version: 2,
       };
 
       const token = CWTFromJSON(JSON.stringify(object));
 
-      expect(token).to.deep.equal(Object.assign(object, { version: 1 }));
+      expect(token).to.deep.equal(Object.assign(object, { version: 2 }));
     });
 
     it('Returns null if the JSON is not valid', function () {
@@ -63,8 +71,43 @@ describe('CWT - Token', function () {
           enabled: ['vendor'],
           disabled: ['vendor2', 'vendor3'],
         },
-        version: 1,
+        version: 2,
       }))).to.be.null;
+    });
+
+    it('Can decode and upgrade a v1 token', function () {
+      expect(CWTFromJSON(JSON.stringify({
+        issuer: 'didomi',
+        user_id: 'user@domain.com',
+        user_id_type: 'email',
+        user_id_hash_method: null,
+        consents: [
+          {
+            purpose: 'cookies',
+            vendors: [{
+              id: '*',
+              status: true,
+            }],
+          },
+        ],
+        version: 1,
+      }))).to.deep.equal({
+        issuer: 'didomi',
+        user_id: 'user@domain.com',
+        user_id_type: 'email',
+        user_id_hash_method: null,
+        consents: [
+          {
+            purpose: 'cookies',
+            status: true,
+            vendors: [{
+              id: '*',
+              status: true,
+            }],
+          },
+        ],
+        version: 2,
+      });
     });
   });
 
@@ -83,7 +126,7 @@ describe('CWT - Token', function () {
           enabled: [],
           disabled: [],
         },
-        version: 1,
+        version: 2,
       };
 
       const token = CWTFromCompressedJSON(JSON.stringify(object));
@@ -93,7 +136,7 @@ describe('CWT - Token', function () {
         user_id: 'user@domain.com',
         user_id_type: 'email',
         user_id_hash_method: null,
-        version: 1,
+        version: 2,
         consents: [],
       });
     });
@@ -112,7 +155,7 @@ describe('CWT - Token', function () {
           enabled: ['vendor'],
           disabled: ['vendor2', 'vendor3'],
         },
-        version: 1,
+        version: 2,
       };
 
       const token = CWTFromCompressedJSON(JSON.stringify(object));
@@ -122,10 +165,11 @@ describe('CWT - Token', function () {
         user_id: 'user@domain.com',
         user_id_type: 'email',
         user_id_hash_method: null,
-        version: 1,
+        version: 2,
         consents: [
           {
             purpose: 'purpose',
+            status: true,
             vendors: [
               {
                 id: 'vendor',
@@ -143,6 +187,7 @@ describe('CWT - Token', function () {
           },
           {
             purpose: 'purpose3',
+            status: true,
             vendors: [
               {
                 id: 'vendor',
@@ -160,6 +205,7 @@ describe('CWT - Token', function () {
           },
           {
             purpose: 'purpose2',
+            status: false,
             vendors: [
               {
                 id: 'vendor',
@@ -194,8 +240,88 @@ describe('CWT - Token', function () {
         user_id_type: 'email',
         user_id_hash_method: null,
         consents: [],
-        version: 1,
+        version: 2,
       }))).to.be.null;
+    });
+
+    it('Can decode and upgrade a v1 token', function () {
+      expect(CWTFromCompressedJSON(JSON.stringify({
+        issuer: 'didomi',
+        user_id: 'user@domain.com',
+        user_id_type: 'email',
+        user_id_hash_method: null,
+        purposes: {
+          enabled: ['purpose', 'purpose3'],
+          disabled: ['purpose2'],
+        },
+        vendors: {
+          enabled: ['vendor'],
+          disabled: ['vendor2', 'vendor3'],
+        },
+        version: 1,
+      }))).to.deep.equal({
+        issuer: 'didomi',
+        user_id: 'user@domain.com',
+        user_id_type: 'email',
+        user_id_hash_method: null,
+        version: 2,
+        consents: [
+          {
+            purpose: 'purpose',
+            status: true,
+            vendors: [
+              {
+                id: 'vendor',
+                status: true,
+              },
+              {
+                id: 'vendor2',
+                status: false,
+              },
+              {
+                id: 'vendor3',
+                status: false,
+              },
+            ],
+          },
+          {
+            purpose: 'purpose3',
+            status: true,
+            vendors: [
+              {
+                id: 'vendor',
+                status: true,
+              },
+              {
+                id: 'vendor2',
+                status: false,
+              },
+              {
+                id: 'vendor3',
+                status: false,
+              },
+            ],
+          },
+          {
+            purpose: 'purpose2',
+            status: false,
+            vendors: [
+              {
+                id: 'vendor',
+                status: false,
+              },
+              {
+                id: 'vendor2',
+                status: false,
+              },
+              {
+                id: 'vendor3',
+                status: false,
+              },
+            ],
+          },
+        ],
+      });
     });
   });
 
@@ -211,7 +337,7 @@ describe('CWT - Token', function () {
 
       const token = CWTFromBase64((new Buffer(JSON.stringify(object))).toString('base64'));
 
-      expect(token).to.deep.equal(Object.assign({}, object, { version: 1 }));
+      expect(token).to.deep.equal(Object.assign({}, object, { version: 2 }));
     });
 
     it('Returns null if the string is not valid', function () {
@@ -262,10 +388,11 @@ describe('CWT - Token', function () {
         user_id: 'user@domain.com',
         user_id_type: 'email',
         user_id_hash_method: null,
-        version: 1,
+        version: 2,
         consents: [
           {
             purpose: 'purpose',
+            status: true,
             vendors: [
               {
                 id: 'vendor',
@@ -283,6 +410,7 @@ describe('CWT - Token', function () {
           },
           {
             purpose: 'purpose3',
+            status: true,
             vendors: [
               {
                 id: 'vendor',
@@ -300,6 +428,7 @@ describe('CWT - Token', function () {
           },
           {
             purpose: 'purpose2',
+            status: false,
             vendors: [
               {
                 id: 'vendor',
@@ -344,7 +473,7 @@ describe('CWT - Token', function () {
         user_id_type: null,
         user_id_hash_method: null,
         consents: [],
-        version: 1,
+        version: 2,
       });
 
       expect(new CWT({
@@ -356,7 +485,7 @@ describe('CWT - Token', function () {
         user_id_type: null,
         user_id_hash_method: null,
         consents: [],
-        version: 1,
+        version: 2,
       });
     });
 
@@ -371,7 +500,7 @@ describe('CWT - Token', function () {
         };
 
         const token = new CWT(object);
-        expect(token.toJSON()).to.equal(JSON.stringify(Object.assign({}, object, { version: 1 })));
+        expect(token.toJSON()).to.equal(JSON.stringify(Object.assign({}, object, { version: 2 })));
       });
     });
 
@@ -391,7 +520,7 @@ describe('CWT - Token', function () {
           user_id: 'user@domain.com',
           user_id_type: 'email',
           user_id_hash_method: null,
-          version: 1,
+          version: 2,
           purposes: {
             enabled: [],
             disabled: [],
@@ -415,16 +544,19 @@ describe('CWT - Token', function () {
         const token = new CWT(object);
 
         // All true
+        token.setPurposeStatus('purpose', true);
         token.setConsentStatus(true, 'purpose', 'vendor');
         token.setConsentStatus(true, 'purpose', 'vendor2');
         token.setConsentStatus(true, 'purpose', 'vendor3');
 
         // All false
+        token.setPurposeStatus('purpose2', false);
         token.setConsentStatus(false, 'purpose2', 'vendor');
         token.setConsentStatus(false, 'purpose2', 'vendor2');
         token.setConsentStatus(false, 'purpose2', 'vendor3');
 
         // Some true / some false
+        token.setPurposeStatus('purpose3', true);
         token.setConsentStatus(true, 'purpose3', 'vendor');
         token.setConsentStatus(false, 'purpose3', 'vendor2');
         token.setConsentStatus(false, 'purpose3', 'vendor3');
@@ -434,7 +566,7 @@ describe('CWT - Token', function () {
           user_id: 'user@domain.com',
           user_id_type: 'email',
           user_id_hash_method: null,
-          version: 1,
+          version: 2,
           purposes: {
             enabled: ['purpose', 'purpose3'],
             disabled: ['purpose2'],
@@ -458,7 +590,7 @@ describe('CWT - Token', function () {
         };
 
         const token = new CWT(object);
-        expect(token.toBase64()).to.equal((new Buffer(JSON.stringify(Object.assign({}, object, { version: 1 })))).toString('base64'));
+        expect(token.toBase64()).to.equal((new Buffer(JSON.stringify(Object.assign({}, object, { version: 2 })))).toString('base64'));
       });
     });
 
@@ -478,7 +610,7 @@ describe('CWT - Token', function () {
           user_id: 'user@domain.com',
           user_id_type: 'email',
           user_id_hash_method: null,
-          version: 1,
+          version: 2,
           purposes: {
             enabled: [],
             disabled: [],
@@ -559,6 +691,108 @@ describe('CWT - Token', function () {
         token.setConsentStatus(true, 'cookies', 'vendor2');
 
         expect(token.getConsentStatus('cookies', 'vendor')).to.be.undefined;
+      });
+    });
+  });
+
+  describe('toV2Compressed', function () {
+    it('returns null if it\'s null', function () {
+      expect(toV2Compressed(null)).to.be.null;
+    });
+
+    it('returns null if it\'s not a v1', function () {
+      expect(toV2Compressed({
+        version: 2,
+      })).to.be.null;
+    });
+
+    it('updates the version flag', function () {
+      expect(toV2Compressed({
+        version: 1,
+      })).to.deep.equal({ version: 2 });
+    });
+  });
+
+  describe('toV2NonCompressed', function () {
+    it('returns null if it\'s null', function () {
+      expect(toV2NonCompressed(null)).to.be.null;
+    });
+
+    it('returns null if it\'s not a v1', function () {
+      expect(toV2NonCompressed({
+        version: 2,
+      })).to.be.null;
+    });
+
+    it('updates the version flag', function () {
+      expect(toV2NonCompressed({
+        version: 1,
+      })).to.have.property('version', 2);
+    });
+
+    it('infers purpose status true from consents', function () {
+      expect(toV2NonCompressed({
+        version: 1,
+        user_id: 'user',
+        consents: [
+          {
+            purpose: 'cookies',
+            vendors: [
+              {
+                id: '*',
+                status: true,
+              },
+            ],
+          },
+        ],
+      })).to.deep.equal({
+        version: 2,
+        user_id: 'user',
+        consents: [
+          {
+            purpose: 'cookies',
+            status: true,
+            vendors: [
+              {
+                id: '*',
+                status: true,
+              },
+            ],
+          },
+        ],
+      });
+    });
+
+    it('infers purpose status false from consents', function () {
+      expect(toV2NonCompressed({
+        version: 1,
+        user_id: 'user',
+        consents: [
+          {
+            purpose: 'cookies',
+            vendors: [
+              {
+                id: '*',
+                status: false,
+              },
+            ],
+          },
+        ],
+      })).to.deep.equal({
+        version: 2,
+        user_id: 'user',
+        consents: [
+          {
+            purpose: 'cookies',
+            status: false,
+            vendors: [
+              {
+                id: '*',
+                status: false,
+              },
+            ],
+          },
+        ],
       });
     });
   });

@@ -65,7 +65,7 @@ class CWT {
      *
      * @type {number}
      */
-    this.version = 1;
+    this.version = 2;
   }
 
   /**
@@ -117,19 +117,19 @@ class CWT {
     };
 
     const statusByVendor = {};
-    const vendorsByPurpose = {};
 
-    // Find purposes that are all false (ie disabled purposes)
+    // Get enabled and disabled purposes
     for (const consentIndex in token.consents) {
-      const { purpose, vendors } = token.consents[consentIndex];
+      const { purpose, status, vendors } = token.consents[consentIndex];
 
-      vendorsByPurpose[purpose] = {};
+      if (status === true) {
+        serializedToken.purposes.enabled.push(purpose);
+      } else if (status === false) {
+        serializedToken.purposes.disabled.push(purpose);
+      }
 
-      let disabledPurpose = true;
       for (const vendorIndex in vendors) {
         const vendor = vendors[vendorIndex];
-
-        disabledPurpose = disabledPurpose && vendor.status === false;
 
         if (!statusByVendor[vendor.id]) {
           statusByVendor[vendor.id] = {
@@ -139,14 +139,6 @@ class CWT {
         }
 
         statusByVendor[vendor.id].purposes[purpose] = vendor.status;
-        vendorsByPurpose[purpose][vendor.id] = vendor.status;
-      }
-
-      if (disabledPurpose) {
-        // All vendors are set to false for this purpose, which means the purpose itself should be false
-        serializedToken.purposes.disabled.push(purpose);
-      } else {
-        serializedToken.purposes.enabled.push(purpose);
       }
     }
 
@@ -267,6 +259,87 @@ class CWT {
 
     return undefined;
   }
+
+  /**
+   * Get the consent status of the purpose
+   *
+   * @param {string} purposeId Purpose ID
+   */
+  getPurposeStatus(purposeId) {
+    const consent = this.consents.find(c => c.purpose === purposeId);
+
+    if (consent && typeof consent.status === 'boolean') {
+      return consent.status;
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Consent status for the purpose
+   *
+   * @param {*} status
+   * @param {*} purposeId
+   */
+  setPurposeStatus(purposeId, status) {
+    // Check if we already have consent information for that purpose
+    let consent = this.consents.find(c => c.purpose === purposeId);
+
+    if (!consent) {
+      consent = {
+        purpose: purposeId,
+        vendors: [],
+      };
+
+      this.consents.push(consent);
+    }
+
+    consent.status = status;
+  }
+}
+
+/**
+ * Transform a token version 1 to a version 2
+ *
+ * The main difference between version 1 and 2 is that we now have a per-purpose consent status.
+ * To upscale, we set the purpose consent status to true if all vendors have a flag set to true as well.
+ *
+ * @param object
+ */
+function toV2NonCompressed(object) {
+  if (
+    !object
+    || object.version !== 1
+  ) {
+    return null;
+  }
+
+  object.version = 2;
+
+  if (!object.consents) {
+    // Nothing to do
+    return object;
+  }
+
+  object.consents = object.consents.map((consent) => {
+    if (Array.isArray(consent.vendors)) {
+      if (consent.vendors.length === 0) {
+        consent.status = null;
+      } else {
+        let allTrue = true;
+
+        consent.vendors.forEach((vendor) => {
+          allTrue = vendor.status === true && allTrue;
+        });
+
+        consent.status = allTrue;
+      }
+    }
+
+    return consent;
+  });
+
+  return object;
 }
 
 /**
@@ -293,7 +366,33 @@ function CWTFromJSON(jsonString) {
     return null;
   }
 
+  if (object.version === 1) {
+    // This is a version 1 token, we need to upgrade it to a version 2
+    object = toV2NonCompressed(object);
+  }
+
   return new CWT(object);
+}
+
+/**
+ * Transform a compressed token version 1 to a version 2
+ *
+ * The main difference between version 1 and 2 is that we now have a per-purpose consent status.
+ * To upscale, we do not need to do anything except changing the version number (yay!) as we already store purpose status in the compressed form.
+ *
+ * @param object
+ */
+function toV2Compressed(object) {
+  if (
+    !object
+    || object.version !== 1
+  ) {
+    return null;
+  }
+
+  object.version = 2;
+
+  return object;
 }
 
 /**
@@ -327,6 +426,11 @@ function CWTFromCompressedJSON(jsonString) {
     return null;
   }
 
+  if (object.version === 1) {
+    // This is a version 1 token, we need to upgrade it to a version 2
+    object = toV2Compressed(object);
+  }
+
   const token = new CWT({
     issuer: object.issuer,
     user_id: object.user_id,
@@ -338,6 +442,8 @@ function CWTFromCompressedJSON(jsonString) {
 
   for (const purposeIdIndex in object.purposes.enabled) {
     const purposeId = object.purposes.enabled[purposeIdIndex];
+
+    token.setPurposeStatus(purposeId, true);
 
     for (const vendorIdIndex in object.vendors.enabled) {
       const vendorId = object.vendors.enabled[vendorIdIndex];
@@ -354,6 +460,8 @@ function CWTFromCompressedJSON(jsonString) {
 
   for (const purposeIdIndex in object.purposes.disabled) {
     const purposeId = object.purposes.disabled[purposeIdIndex];
+
+    token.setPurposeStatus(purposeId, false);
 
     for (const vendorIdIndex in object.vendors.enabled) {
       const vendorId = object.vendors.enabled[vendorIdIndex];
@@ -453,4 +561,6 @@ module.exports = {
   CWTFromJSON,
   CWTFromCompressedJSON,
   Purposes,
+  toV2Compressed,
+  toV2NonCompressed,
 };

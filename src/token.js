@@ -121,12 +121,20 @@ class CWT {
 
     // Find purposes that are all false (ie disabled purposes)
     for (const consentIndex in token.consents) {
+      if (!token.consents.hasOwnProperty(consentIndex)) {
+        continue;
+      }
+
       const { purpose, vendors } = token.consents[consentIndex];
 
       vendorsByPurpose[purpose] = {};
 
       let disabledPurpose = true;
       for (const vendorIndex in vendors) {
+        if (!vendors.hasOwnProperty(vendorIndex)) {
+          continue;
+        }
+
         const vendor = vendors[vendorIndex];
 
         disabledPurpose = disabledPurpose && vendor.status === false;
@@ -154,10 +162,18 @@ class CWT {
     // Set the other vendors to false
     const vendorIdStrings = Object.keys(statusByVendor);
     for (const vendorIdStringIndex in vendorIdStrings) {
+      if (!vendorIdStrings.hasOwnProperty(vendorIdStringIndex)) {
+        continue;
+      }
+
       const vendorIdString = vendorIdStrings[vendorIdStringIndex];
       let enabledVendor = true;
 
       for (const purposeIdIndex in serializedToken.purposes.enabled) {
+        if (!serializedToken.purposes.enabled.hasOwnProperty(purposeIdIndex)) {
+          continue;
+        }
+
         const purposeId = serializedToken.purposes.enabled[purposeIdIndex];
 
         enabledVendor = enabledVendor
@@ -337,15 +353,27 @@ function CWTFromCompressedJSON(jsonString) {
   });
 
   for (const purposeIdIndex in object.purposes.enabled) {
+    if (!object.purposes.enabled.hasOwnProperty(purposeIdIndex)) {
+      continue;
+    }
+
     const purposeId = object.purposes.enabled[purposeIdIndex];
 
     for (const vendorIdIndex in object.vendors.enabled) {
+      if (!object.vendors.enabled.hasOwnProperty(vendorIdIndex)) {
+        continue;
+      }
+
       const vendorId = object.vendors.enabled[vendorIdIndex];
 
       token.setConsentStatus(true, purposeId, vendorId);
     }
 
     for (const vendorIdIndex in object.vendors.disabled) {
+      if (!object.vendors.disabled.hasOwnProperty(vendorIdIndex)) {
+        continue;
+      }
+
       const vendorId = object.vendors.disabled[vendorIdIndex];
 
       token.setConsentStatus(false, purposeId, vendorId);
@@ -353,15 +381,27 @@ function CWTFromCompressedJSON(jsonString) {
   }
 
   for (const purposeIdIndex in object.purposes.disabled) {
+    if (!object.purposes.disabled.hasOwnProperty(purposeIdIndex)) {
+      continue;
+    }
+
     const purposeId = object.purposes.disabled[purposeIdIndex];
 
     for (const vendorIdIndex in object.vendors.enabled) {
+      if (!object.vendors.enabled.hasOwnProperty(vendorIdIndex)) {
+        continue;
+      }
+
       const vendorId = object.vendors.enabled[vendorIdIndex];
 
       token.setConsentStatus(false, purposeId, vendorId);
     }
 
     for (const vendorIdIndex in object.vendors.disabled) {
+      if (!object.vendors.disabled.hasOwnProperty(vendorIdIndex)) {
+        continue;
+      }
+
       const vendorId = object.vendors.disabled[vendorIdIndex];
 
       token.setConsentStatus(false, purposeId, vendorId);

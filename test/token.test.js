@@ -1,6 +1,10 @@
 const expect = require('chai').expect;
 const { CWT, CWTFromBase64, CWTFromCompressedBase64, CWTFromCompressedJSON, CWTFromJSON } = require('../src/token');
 
+// Ensure that we cna run correctly if the native prototype of Object is modified
+/* eslint no-extend-native: off */
+Object.prototype._extend = function () {};
+
 describe('CWT - Token', function () {
   describe('CWTFromJSON', function () {
     it('Generates a CWT object from a JSON string without consent', function () {

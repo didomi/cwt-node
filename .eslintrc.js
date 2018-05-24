@@ -19,7 +19,7 @@ module.exports = {
     ],
 
     "no-console": "error",
-
+    "no-continue": "off",
     "no-prototype-builtins": "off",
     "max-len": ["error", 100, 2, {
       "ignoreUrls": true,
